@@ -7,9 +7,11 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [ ] Ticket ID: `TASK-###`
 - [ ] Title:
 - [ ] Status: `Backlog | To Do | In Progress | In Review | Done`
+- [ ] Size: `S | M | L`
 - [ ] Priority:
 - [ ] Requested By:
 - [ ] Created Date:
+- [ ] Branch: `feature/<ticket-number>-<topic> | fix/<ticket-number>-<topic> | chore/<ticket-number>-<topic>`
 
 ## Objective
 - [ ] What should be implemented or changed:
@@ -48,3 +50,4 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [ ] Latest Update:
 - [ ] Blockers:
 - [ ] Completed:
+- [ ] Merge Commit (if merged):

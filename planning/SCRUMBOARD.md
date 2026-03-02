@@ -332,19 +332,6 @@ Notes:
 
 ## To Do
 
-### TASK-002: M1 repository skeleton + runnable entrypoint
-- [ ] Status: To Do
-- Size: M
-- Objective: Create minimal `src/` package structure and runnable smoke entrypoint.
-- Business Value: Establishes implementation base for all subsequent tasks.
-- Inputs/Context: `docs/deep-research-report.md` (M1-01), `docs/architecture.md`.
-- Target Files/Paths: `src/`, `tests/`, `requirements.txt`, `README.md`.
-- Implementation Notes: Add version/smoke command path (`python -m ...`) and test.
-- Constraints/Standards: Follow repository standards and `src/`-first rule.
-- Tests Required: Smoke test exits 0 and prints version.
-- Done Criteria: Entrypoint and skeleton run on clean environment.
-- Deliverable Format: Code + smoke test proof.
-
 ### TASK-003: M1 dependency baseline + audio device listing smoke
 - [ ] Status: To Do
 - Size: S
@@ -380,6 +367,15 @@ No tasks currently in review.
 - Completed: 2026-03-02
 - Outcome: Scope and board were aligned to deep research with dependency order and size estimates.
 - Verification: Ticket file `planning/tickets/TASK-001.md` completed and board updated.
+- Ticket Record: `planning/tickets/TASK-001.md`
+
+### TASK-002: M1 repository skeleton + runnable entrypoint
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-02
+- Outcome: Implemented `src/bob` package skeleton with runnable `python -m bob` entrypoint.
+- Verification: `python -m bob --version` -> `0.1.0`; `python -m bob` -> bootstrap message; `pytest -q` -> 2 passed.
+- Ticket Record: `planning/tickets/TASK-002.md`
 
 ---
 
@@ -388,3 +384,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
+- Recommended next ticket: `TASK-003`.

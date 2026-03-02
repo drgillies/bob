@@ -27,6 +27,7 @@ Execution board derived from `docs/deep-research-report.md`.
 - Implementation Notes:
 - Constraints/Standards:
 - Tests Required:
+- Manual Tests:
 - Done Criteria:
 - Deliverable Format:
 ```

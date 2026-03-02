@@ -52,6 +52,17 @@ The agent creates the initial ticket body, then you add final acceptance criteri
   - Smoke command prints available audio devices.
   - Commands documented and runnable with `uv`.
 
+## Manual Tests
+- [x] Command: `$env:PYTHONPATH='src'; uv run --with-requirements requirements.txt -- python -m bob --version`
+- [x] Expected Result: Version prints and command exits 0.
+- [x] Actual Result: `0.1.0`
+- [x] Command: `$env:PYTHONPATH='src'; uv run --with-requirements requirements.txt -- python -m bob --list-audio-devices`
+- [x] Expected Result: At least one audio device line is printed and command exits 0.
+- [x] Actual Result: Printed `Detected audio devices:` plus enumerated device list.
+- [x] Command: `$env:PYTHONPATH='src'; uv run --with-requirements requirements.txt -- python -m pytest -q`
+- [x] Expected Result: Test suite passes and command exits 0.
+- [x] Actual Result: `3 passed in 0.27s`
+
 ## Done Criteria
 - [x] Minimum completion conditions for the agent:
   - Dependency baseline and docs updated to `uv`.

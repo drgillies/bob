@@ -34,6 +34,11 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 ## Tests Required
 - [ ] Unit/integration/verification requirements:
 
+## Manual Tests
+- [ ] Command:
+- [ ] Expected Result:
+- [ ] Actual Result:
+
 ## Done Criteria
 - [ ] Minimum completion conditions for the agent:
 

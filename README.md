@@ -6,6 +6,7 @@ Lightweight local voice assistant project focused on older hardware.
 
 - Repository is in planning/bootstrap phase.
 - Primary implementation targets live under `src/` when development begins.
+- `TASK-001` and `TASK-002` are complete; next execution ticket is `TASK-003`.
 
 ## Repository Layout
 
@@ -45,3 +46,14 @@ Lightweight local voice assistant project focused on older hardware.
   - `pytest`
 - Run lint/type checks when configured for the project.
 - Update docs with any behavior/configuration changes.
+
+## Bootstrap Smoke Check
+
+From repository root (PowerShell):
+
+1. Set import path for `src/` layout:
+   - `$env:PYTHONPATH = "src"`
+2. Run version smoke check:
+   - `python -m bob --version`
+3. Run default entrypoint:
+   - `python -m bob`

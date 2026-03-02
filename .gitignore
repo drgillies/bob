@@ -1,0 +1,10 @@
+# Local project configuration (do not commit machine/user-specific values)
+config/settings.local.json
+config/*.local.json
+.env
+.env.*
+!.env.example
+
+# Python cache artifacts
+__pycache__/
+*.pyc

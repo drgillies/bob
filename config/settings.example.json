@@ -1,0 +1,21 @@
+{
+  "project": {
+    "name": "Bob",
+    "environment": "development",
+    "log_level": "INFO"
+  },
+  "assistant": {
+    "name": "Bob",
+    "wake_phrase": "Hey Bob"
+  },
+  "timeouts": {
+    "listen_seconds": 8,
+    "response_start_seconds": 3,
+    "network_fallback_seconds": 5
+  },
+  "audio": {
+    "input_device": "default",
+    "output_device": "default",
+    "sample_rate_hz": 16000
+  }
+}

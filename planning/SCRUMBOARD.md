@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-004: M1 audio capture MVP with recovery
-- [ ] Status: Backlog
-- Size: M
-- Objective: Implement continuous mic frame capture using `sounddevice` with queue-based callback and stream recovery.
-- Business Value: Enables low-latency always-on listening on older hardware.
-- Inputs/Context: `docs/deep-research-report.md` (M1-03), `docs/architecture.md`.
-- Target Files/Paths: `src/audio/`, `src/orchestrator/`, `tests/`.
-- Implementation Notes: Keep callback lightweight; recover from unplug/replug within 30s.
-- Constraints/Standards: `standards/code-standards.md`, `standards/style-guides.md`.
-- Tests Required: Unit test for queueing path; integration smoke for capture start/stop and recovery.
-- Done Criteria: Continuous capture works; callback non-blocking; recovery path verified.
-- Deliverable Format: Code + test evidence + short validation log.
-
 ### TASK-005: M1 wake-word spike and decision
 - [ ] Status: Backlog
 - Size: M
@@ -375,6 +362,14 @@ No tasks currently in review.
 - Verification: `uv run --with-requirements requirements.txt -- python -m bob --version` -> `0.1.0`; `--list-audio-devices` printed detected devices; `uv run ... pytest -q` -> 3 passed.
 - Ticket Record: `planning/tickets/TASK-003.md`
 
+### TASK-004: M1 audio capture MVP with recovery
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-02
+- Outcome: Added `AudioCaptureService` with queue-based callback capture, safe start/stop, and stream recovery retries.
+- Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_audio_capture.py` -> 5 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 12 passed, 1 skipped (hardware test skip-by-default).
+- Ticket Record: `planning/tickets/TASK-004.md`
+
 ---
 
 ## Usage Notes
@@ -382,4 +377,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket: `TASK-004`.
+- Recommended next ticket: `TASK-005`.

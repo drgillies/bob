@@ -332,18 +332,7 @@ Notes:
 
 ## To Do
 
-### TASK-003: M1 dependency baseline + audio device listing smoke
-- [ ] Status: To Do
-- Size: S
-- Objective: Pin initial dependency set and add audio device listing script.
-- Business Value: Confirms target-machine audio compatibility early.
-- Inputs/Context: `docs/deep-research-report.md` (M1-02), `docs/setup-target-machine.md`.
-- Target Files/Paths: `requirements.txt`, `src/audio/`, `docs/setup-target-machine.md`, `tests/`.
-- Implementation Notes: Include `sounddevice` install notes and device enumeration command.
-- Constraints/Standards: Reproducible install on Windows.
-- Tests Required: Run smoke script and capture output on target machine.
-- Done Criteria: Dependencies pinned and audio devices listed successfully.
-- Deliverable Format: Updated deps/docs + smoke command evidence.
+No tasks currently in To Do.
 
 ---
 
@@ -377,6 +366,14 @@ No tasks currently in review.
 - Verification: `python -m bob --version` -> `0.1.0`; `python -m bob` -> bootstrap message; `pytest -q` -> 2 passed.
 - Ticket Record: `planning/tickets/TASK-002.md`
 
+### TASK-003: M1 dependency baseline + audio device listing smoke
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-02
+- Outcome: Standardized a `uv`-first dependency workflow and added audio device listing smoke command.
+- Verification: `uv run --with-requirements requirements.txt -- python -m bob --version` -> `0.1.0`; `--list-audio-devices` printed detected devices; `uv run ... pytest -q` -> 3 passed.
+- Ticket Record: `planning/tickets/TASK-003.md`
+
 ---
 
 ## Usage Notes
@@ -384,4 +381,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket: `TASK-003`.
+- Recommended next ticket: `TASK-004`.

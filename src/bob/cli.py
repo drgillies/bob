@@ -23,6 +23,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Print package version and exit.",
     )
+    parser.add_argument(
+        "--list-audio-devices",
+        action="store_true",
+        help="List discovered audio input/output devices and exit.",
+    )
     return parser
 
 
@@ -39,6 +44,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.version:
         print(__version__)
         return 0
+
+    if args.list_audio_devices:
+        from bob.audio.devices import print_audio_devices
+
+        return print_audio_devices()
 
     print("Bob bootstrap entrypoint ready.")
     return 0

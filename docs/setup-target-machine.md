@@ -15,15 +15,16 @@ Install and run Bob reliably on older Windows hardware.
 
 1. Install Python 3.10+.
 2. Clone repository.
-3. Create and activate virtual environment:
-   - `python -m venv .venv`
-   - `.venv\Scripts\Activate.ps1`
-4. Install dependencies:
-   - `python -m pip install --upgrade pip`
-   - `pip install -r requirements.txt`
-5. Create local config files:
+3. Install `uv`:
+   - `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+4. Create local config files:
    - `Copy-Item config/settings.example.json config/settings.local.json`
    - `Copy-Item .env.example .env`
+5. Set import path for `src/` layout:
+   - `$env:PYTHONPATH = "src"`
+6. Validate baseline with `uv`:
+   - `uv run --with-requirements requirements.txt -- python -m bob --version`
+   - `uv run --with-requirements requirements.txt -- python -m bob --list-audio-devices`
 
 ## Local Configuration
 

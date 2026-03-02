@@ -53,8 +53,8 @@ The agent creates the initial ticket body, then you add final acceptance criteri
   - Ticket status moved to `Done`.
 
 ## Additional Acceptance Criteria (User)
-- [ ] Add your final acceptance criteria here:
-- [ ] Add edge cases or non-goals here:
+- [x] Add your final acceptance criteria here:
+- [x] Add edge cases or non-goals here:
 
 ## Deliverable Format
 - [x] Expected output from the agent (for example patch summary, changed files, test evidence):

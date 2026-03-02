@@ -332,19 +332,6 @@ Notes:
 
 ## To Do
 
-### TASK-001: Convert deep research into execution baseline docs
-- [ ] Status: To Do
-- Size: S
-- Objective: Sync scope and planning docs with research-backed milestone breakdown.
-- Business Value: Reduces ambiguity before implementation starts.
-- Inputs/Context: `docs/deep-research-report.md`, `docs/basic-scope.md`.
-- Target Files/Paths: `docs/basic-scope.md`, `planning/SCRUMBOARD.md`.
-- Implementation Notes: Ensure milestone exit criteria and quality gates are explicit.
-- Constraints/Standards: Keep docs aligned with `src/` structure and config/secrets rules.
-- Tests Required: Document review against standards checklist.
-- Done Criteria: Scope and board include actionable, measurable milestones.
-- Deliverable Format: Updated docs with review notes.
-
 ### TASK-002: M1 repository skeleton + runnable entrypoint
 - [ ] Status: To Do
 - Size: M
@@ -387,7 +374,12 @@ No tasks currently in review.
 
 ## Done
 
-No completed execution tickets yet.
+### TASK-001: Convert deep research into execution baseline docs
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-02
+- Outcome: Scope and board were aligned to deep research with dependency order and size estimates.
+- Verification: Ticket file `planning/tickets/TASK-001.md` completed and board updated.
 
 ---
 

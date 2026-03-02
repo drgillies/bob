@@ -12,7 +12,7 @@
 ## Git and Branches
 
 - Source of truth for Git workflow: `standards/git-standards.md`.
-- Every ticket gets a new short-lived branch created from `main` before any implementation work starts.
+- Every ticket MUST get a new short-lived branch created from `main` before any implementation work starts.
 - Branch naming follows: `feature/<ticket-number>-<topic>`, `fix/<ticket-number>-<topic>`, `chore/<ticket-number>-<topic>`.
   - Example: `feature/b1001-add-voice`.
 - Before merge to `main`:

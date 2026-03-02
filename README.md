@@ -6,7 +6,7 @@ Lightweight local voice assistant project focused on older hardware.
 
 - Repository is in planning/bootstrap phase.
 - Primary implementation targets live under `src/` when development begins.
-- `TASK-001` and `TASK-002` are complete; next execution ticket is `TASK-003`.
+- `TASK-001`, `TASK-002`, and `TASK-003` are complete.
 
 ## Repository Layout
 
@@ -20,16 +20,17 @@ Lightweight local voice assistant project focused on older hardware.
 
 ## Local Setup (Windows PowerShell)
 
-1. Create virtual environment:
-   - `python -m venv .venv`
-2. Activate virtual environment:
-   - `.venv\Scripts\Activate.ps1`
-3. Install dependencies:
-   - `python -m pip install --upgrade pip`
-   - `pip install -r requirements.txt`
-4. Create local config files:
+1. Create local config files:
    - `Copy-Item config/settings.example.json config/settings.local.json`
    - `Copy-Item .env.example .env`
+2. Set import path for `src/` layout:
+   - `$env:PYTHONPATH = "src"`
+3. Verify bootstrap entrypoint with `uv`:
+   - `uv run --with-requirements requirements.txt -- python -m bob --version`
+4. Verify default entrypoint with `uv`:
+   - `uv run --with-requirements requirements.txt -- python -m bob`
+5. List available audio devices with `uv`:
+   - `uv run --with-requirements requirements.txt -- python -m bob --list-audio-devices`
 
 ## Workflow Baseline
 
@@ -43,7 +44,7 @@ Lightweight local voice assistant project focused on older hardware.
 ## Validation Baseline
 
 - Run tests before PR:
-  - `pytest`
+  - `uv run --with-requirements requirements.txt -- python -m pytest -q`
 - Run lint/type checks when configured for the project.
 - Update docs with any behavior/configuration changes.
 
@@ -54,6 +55,8 @@ From repository root (PowerShell):
 1. Set import path for `src/` layout:
    - `$env:PYTHONPATH = "src"`
 2. Run version smoke check:
-   - `python -m bob --version`
+   - `uv run --with-requirements requirements.txt -- python -m bob --version`
 3. Run default entrypoint:
-   - `python -m bob`
+   - `uv run --with-requirements requirements.txt -- python -m bob`
+4. Run audio device discovery smoke check:
+   - `uv run --with-requirements requirements.txt -- python -m bob --list-audio-devices`

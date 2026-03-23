@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-006: M1 wake phrase integration in idle loop
-- [ ] Status: Backlog
-- Size: M
-- Objective: Integrate wake detector with state machine (IDLE -> TRIGGERED) and debouncing.
-- Business Value: Core activation path for Bob.
-- Inputs/Context: `docs/deep-research-report.md` (M1-05), `docs/architecture.md`.
-- Target Files/Paths: `src/wakeword/`, `src/orchestrator/`, `tests/`.
-- Implementation Notes: Log false triggers during manual 15-minute run.
-- Constraints/Standards: Keep idle CPU low; no full STT in idle loop.
-- Tests Required: Unit tests for debouncing/state transitions; integration wake trigger test.
-- Done Criteria: Wake phrase reliably triggers once per utterance; false triggers logged.
-- Deliverable Format: Code + test output + manual observation note.
-
 ### TASK-007: M1 deterministic TTS response
 - [ ] Status: Backlog
 - Size: S
@@ -365,6 +352,14 @@ No tasks currently in review.
 - Verification: `openwakeword` import passed but model init was not turnkey; `pvporcupine` import passed; `pocketsphinx` import and `Decoder()` initialization passed.
 - Ticket Record: `planning/tickets/TASK-005.md`
 
+### TASK-006: M1 wake phrase integration in idle loop
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-23
+- Outcome: Added a wake-word adapter boundary, an optional `openWakeWord` detector wrapper, and idle-loop orchestration with debounced state transitions.
+- Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_idle_loop_orchestrator.py tests/test_openwakeword_detector.py` -> 10 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 22 passed, 1 skipped; `_testing.py wake-idle-loop` produced `IDLE -> TRIGGERED -> IDLE`.
+- Ticket Record: `planning/tickets/TASK-006.md`
+
 ---
 
 ## Usage Notes
@@ -372,4 +367,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-005`: `TASK-006`.
+- Recommended next ticket after `TASK-006`: `TASK-007`.

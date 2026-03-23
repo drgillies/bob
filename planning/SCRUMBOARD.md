@@ -319,11 +319,7 @@ No active tasks.
 
 ## In Review
 
-### TASK-005: M1 wake-word spike and decision
-- [ ] Status: In Review
-- Review Focus: Validate the recommendation and confirm the benchmark procedure is sufficient for target-machine testing.
-- Verification Result: Local Windows feasibility checks were recorded in `docs/benchmark-baseline.md`; `openwakeword` import passed but model setup was not turnkey, `pvporcupine` import passed, and `pocketsphinx` import plus `Decoder()` initialization passed.
-- Ticket Record: `planning/tickets/TASK-005.md`
+No tasks currently in review.
 
 ---
 
@@ -360,6 +356,14 @@ No active tasks.
 - Outcome: Added `AudioCaptureService` with queue-based callback capture, safe start/stop, and stream recovery retries.
 - Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_audio_capture.py` -> 5 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 12 passed, 1 skipped (hardware test skip-by-default).
 - Ticket Record: `planning/tickets/TASK-004.md`
+
+### TASK-005: M1 wake-word spike and decision
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-23
+- Outcome: Documented wake-word engine recommendation, fallback path, and reproducible benchmark procedure for target-machine validation.
+- Verification: `openwakeword` import passed but model init was not turnkey; `pvporcupine` import passed; `pocketsphinx` import and `Decoder()` initialization passed.
+- Ticket Record: `planning/tickets/TASK-005.md`
 
 ---
 

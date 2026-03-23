@@ -6,7 +6,7 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 ## Ticket Metadata
 - [x] Ticket ID: `TASK-005`
 - [x] Title: M1 wake-word spike and decision
-- [x] Status: `In Review`
+- [x] Status: `Done`
 - [x] Size: `M`
 - [x] Priority: High
 - [x] Requested By: User
@@ -76,7 +76,7 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 ## Execution Log
 - [x] Agent: Codex
 - [x] Started: 2026-03-23
-- [x] Latest Update: Wake-word spike documented in `docs/benchmark-baseline.md` with a primary recommendation, fallback, and reproducible benchmark procedure.
+- [x] Latest Update: Accepted and ready for merge after documenting the recommendation, fallback, and benchmark procedure.
 - [x] Blockers: None
-- [ ] Completed:
+- [x] Completed: 2026-03-23
 - [ ] Merge Commit (if merged):

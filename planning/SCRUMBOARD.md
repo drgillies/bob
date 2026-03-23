@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-005: M1 wake-word spike and decision
-- [ ] Status: Backlog
-- Size: M
-- Objective: Evaluate openWakeWord, Porcupine, and one fallback; choose primary + fallback engine.
-- Business Value: De-risks the always-on constraint and idle CPU target.
-- Inputs/Context: `docs/deep-research-report.md` (M1-04), `docs/basic-scope.md`.
-- Target Files/Paths: `docs/benchmark-baseline.md` or `planning/phase0-wakeword-spike.md`.
-- Implementation Notes: Capture install friction, idle CPU, false-trigger observations, offline caveats/licensing.
-- Constraints/Standards: Offline-first requirement; explicit licensing notes.
-- Tests Required: Benchmark script/steps documented and reproducible.
-- Done Criteria: Primary/fallback wake-word decision recorded with rationale.
-- Deliverable Format: Spike report + decision record.
-
 ### TASK-006: M1 wake phrase integration in idle loop
 - [ ] Status: Backlog
 - Size: M
@@ -370,6 +357,14 @@ No tasks currently in review.
 - Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_audio_capture.py` -> 5 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 12 passed, 1 skipped (hardware test skip-by-default).
 - Ticket Record: `planning/tickets/TASK-004.md`
 
+### TASK-005: M1 wake-word spike and decision
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-23
+- Outcome: Documented wake-word engine recommendation, fallback path, and reproducible benchmark procedure for target-machine validation.
+- Verification: `openwakeword` import passed but model init was not turnkey; `pvporcupine` import passed; `pocketsphinx` import and `Decoder()` initialization passed.
+- Ticket Record: `planning/tickets/TASK-005.md`
+
 ---
 
 ## Usage Notes
@@ -377,4 +372,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket: `TASK-005`.
+- Recommended next ticket after `TASK-005`: `TASK-006`.

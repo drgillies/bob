@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-005: M1 wake-word spike and decision
-- [ ] Status: Backlog
-- Size: M
-- Objective: Evaluate openWakeWord, Porcupine, and one fallback; choose primary + fallback engine.
-- Business Value: De-risks the always-on constraint and idle CPU target.
-- Inputs/Context: `docs/deep-research-report.md` (M1-04), `docs/basic-scope.md`.
-- Target Files/Paths: `docs/benchmark-baseline.md` or `planning/phase0-wakeword-spike.md`.
-- Implementation Notes: Capture install friction, idle CPU, false-trigger observations, offline caveats/licensing.
-- Constraints/Standards: Offline-first requirement; explicit licensing notes.
-- Tests Required: Benchmark script/steps documented and reproducible.
-- Done Criteria: Primary/fallback wake-word decision recorded with rationale.
-- Deliverable Format: Spike report + decision record.
-
 ### TASK-006: M1 wake phrase integration in idle loop
 - [ ] Status: Backlog
 - Size: M
@@ -332,7 +319,11 @@ No active tasks.
 
 ## In Review
 
-No tasks currently in review.
+### TASK-005: M1 wake-word spike and decision
+- [ ] Status: In Review
+- Review Focus: Validate the recommendation and confirm the benchmark procedure is sufficient for target-machine testing.
+- Verification Result: Local Windows feasibility checks were recorded in `docs/benchmark-baseline.md`; `openwakeword` import passed but model setup was not turnkey, `pvporcupine` import passed, and `pocketsphinx` import plus `Decoder()` initialization passed.
+- Ticket Record: `planning/tickets/TASK-005.md`
 
 ---
 
@@ -377,4 +368,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket: `TASK-005`.
+- Recommended next ticket after `TASK-005`: `TASK-006`.

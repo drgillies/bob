@@ -6,7 +6,8 @@
   },
   "assistant": {
     "name": "Bob",
-    "wake_phrase": "Hey Bob"
+    "wake_phrase": "Hey Bob",
+    "deterministic_reply": "Hello, I'm here."
   },
   "timeouts": {
     "listen_seconds": 8,
@@ -17,5 +18,10 @@
     "input_device": "default",
     "output_device": "default",
     "sample_rate_hz": 16000
+  },
+  "tts": {
+    "engine": "pyttsx3",
+    "speech_rate": 150,
+    "voice_id": null
   }
 }

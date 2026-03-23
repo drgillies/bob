@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-007: M1 deterministic TTS response
-- [ ] Status: Backlog
-- Size: S
-- Objective: On wake trigger, produce deterministic reply and return to IDLE.
-- Business Value: Completes first end-to-end feedback loop.
-- Inputs/Context: `docs/deep-research-report.md` (M1-06).
-- Target Files/Paths: `src/tts/`, `src/orchestrator/`, `config/settings.example.json`, `tests/`.
-- Implementation Notes: Default to `pyttsx3`; speech rate configurable.
-- Constraints/Standards: Offline-first; configurable behavior in settings.
-- Tests Required: Integration test for trigger->speak->idle flow.
-- Done Criteria: Deterministic phrase spoken and state reset verified.
-- Deliverable Format: Code + config update + test evidence.
-
 ### TASK-008: M1 state indicator and mute control
 - [ ] Status: Backlog
 - Size: S
@@ -360,6 +347,14 @@ No tasks currently in review.
 - Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_idle_loop_orchestrator.py tests/test_openwakeword_detector.py` -> 10 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 22 passed, 1 skipped; `_testing.py wake-idle-loop` produced `IDLE -> TRIGGERED -> IDLE`.
 - Ticket Record: `planning/tickets/TASK-006.md`
 
+### TASK-007: M1 deterministic TTS response
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-23
+- Outcome: Added `pyttsx3`-backed deterministic speech output after wake trigger and returned Bob to `IDLE`.
+- Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_tts_synthesizer.py tests/test_response_flow.py` -> 4 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 26 passed, 1 skipped; `_testing.py deterministic-response --mode tts` audibly spoke `Hello, I'm here.` and returned to `IDLE`.
+- Ticket Record: `planning/tickets/TASK-007.md`
+
 ---
 
 ## Usage Notes
@@ -367,4 +362,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-006`: `TASK-007`.
+- Recommended next ticket after `TASK-007`: `TASK-008`.

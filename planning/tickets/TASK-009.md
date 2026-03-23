@@ -80,4 +80,4 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [x] Latest Update: Accepted after documenting the STT recommendation, local feasibility checks, and reproducible benchmark procedure.
 - [x] Blockers: None
 - [x] Completed: 2026-03-23
-- [ ] Merge Commit (if merged):
+- [x] Merge Commit (if merged): `8c586c9`

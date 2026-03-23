@@ -146,7 +146,7 @@ Completed:
 1. `docs/architecture.md` with module boundaries and data flow.
 2. `docs/mvp-command-list.md` with initial supported phrases/intents.
 3. `docs/setup-target-machine.md` for old-computer install steps.
-4. `docs/benchmark-baseline.md` with wake-word spike findings and benchmark procedure.
+4. `docs/benchmark-baseline.md` with wake-word and STT spike findings plus benchmark procedures.
 
 Next:
 1. Extend `docs/benchmark-baseline.md` with target-machine CPU/memory/latency measurements.

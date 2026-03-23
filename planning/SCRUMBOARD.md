@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-009: M2 STT engine spike and decision
-- [ ] Status: Backlog
-- Size: M
-- Objective: Compare Vosk vs whisper.cpp/faster-whisper on target hardware and choose default + fallback.
-- Business Value: Controls latency and memory risk before deeper implementation.
-- Inputs/Context: `docs/deep-research-report.md` (M2-01).
-- Target Files/Paths: `docs/benchmark-baseline.md`.
-- Implementation Notes: Measure latency, CPU, memory, install complexity.
-- Constraints/Standards: Offline-first; target hardware constraints.
-- Tests Required: Benchmark runs with reproducible command set.
-- Done Criteria: STT choice documented with measured tradeoffs.
-- Deliverable Format: Benchmark section + decision note.
-
 ### TASK-010: M2 utterance recording with end-of-speech VAD
 - [ ] Status: Backlog
 - Size: M
@@ -350,6 +337,14 @@ No tasks currently in review.
 - Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_state_tracker.py tests/test_mute_control.py` -> 5 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 31 passed, 1 skipped; `_testing.py mute-response` showed `IDLE -> TRIGGERED -> SPEAKING -> IDLE` and `_testing.py mute-response --muted` stayed at `IDLE`.
 - Ticket Record: `planning/tickets/TASK-008.md`
 
+### TASK-009: M2 STT engine spike and decision
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-23
+- Outcome: Documented the STT default recommendation (`Vosk`), fallback (`faster-whisper`), and native-build alternative (`whisper.cpp`) with reproducible benchmark steps.
+- Verification: Local Windows feasibility checks showed `vosk`, `faster-whisper`, and `whispercpp` all imported successfully; `Vosk` was recorded as the lowest-friction default path.
+- Ticket Record: `planning/tickets/TASK-009.md`
+
 ---
 
 ## Usage Notes
@@ -357,4 +352,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-008`: `TASK-009`.
+- Recommended next ticket after `TASK-009`: `TASK-010`.

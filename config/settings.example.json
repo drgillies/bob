@@ -7,7 +7,8 @@
   "assistant": {
     "name": "Bob",
     "wake_phrase": "Hey Bob",
-    "deterministic_reply": "Hello, I'm here."
+    "deterministic_reply": "Hello, I'm here.",
+    "start_muted": false
   },
   "timeouts": {
     "listen_seconds": 8,

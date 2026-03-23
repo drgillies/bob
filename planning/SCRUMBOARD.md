@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-008: M1 state indicator and mute control
-- [ ] Status: Backlog
-- Size: S
-- Objective: Expose and log IDLE/LISTENING/PROCESSING/SPEAKING and config-based mute mode.
-- Business Value: Improves operability and privacy confidence.
-- Inputs/Context: `docs/deep-research-report.md` (M1-07), `docs/basic-scope.md` safety baseline.
-- Target Files/Paths: `src/orchestrator/`, `src/observability/`, `config/settings.example.json`, `tests/`.
-- Implementation Notes: Mute disables wake processing while process remains running.
-- Constraints/Standards: No secret logging; state transitions must be visible.
-- Tests Required: Unit tests for mute behavior and state transition logging.
-- Done Criteria: States are clearly observable; mute behavior works as documented.
-- Deliverable Format: Code + test evidence + docs note.
-
 ### TASK-009: M2 STT engine spike and decision
 - [ ] Status: Backlog
 - Size: M
@@ -355,6 +342,14 @@ No tasks currently in review.
 - Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_tts_synthesizer.py tests/test_response_flow.py` -> 4 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 26 passed, 1 skipped; `_testing.py deterministic-response --mode tts` audibly spoke `Hello, I'm here.` and returned to `IDLE`.
 - Ticket Record: `planning/tickets/TASK-007.md`
 
+### TASK-008: M1 state indicator and mute control
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-23
+- Outcome: Added observable assistant state tracking and mute-aware response control that suppresses wake handling without shutting down the runtime.
+- Verification: `uv run --with-requirements requirements.txt -- python -m pytest -q tests/test_state_tracker.py tests/test_mute_control.py` -> 5 passed; `uv run --with-requirements requirements.txt -- python -m pytest -q` -> 31 passed, 1 skipped; `_testing.py mute-response` showed `IDLE -> TRIGGERED -> SPEAKING -> IDLE` and `_testing.py mute-response --muted` stayed at `IDLE`.
+- Ticket Record: `planning/tickets/TASK-008.md`
+
 ---
 
 ## Usage Notes
@@ -362,4 +357,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-007`: `TASK-008`.
+- Recommended next ticket after `TASK-008`: `TASK-009`.

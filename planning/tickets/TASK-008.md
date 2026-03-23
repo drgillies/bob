@@ -84,4 +84,4 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [x] Latest Update: Accepted after automated coverage and manual muted/unmuted validation through `_testing.py`.
 - [x] Blockers: None
 - [x] Completed: 2026-03-23
-- [ ] Merge Commit (if merged):
+- [x] Merge Commit (if merged): `75539f2`

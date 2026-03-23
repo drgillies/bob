@@ -5,6 +5,11 @@ from bob.orchestrator.idle_loop import (
     IdleLoopConfig,
     IdleLoopOrchestrator,
 )
+from bob.orchestrator.mute_control import (
+    MuteAwareResponseController,
+    MuteController,
+    MuteState,
+)
 from bob.orchestrator.response_flow import (
     DeterministicResponseConfig,
     DeterministicResponseController,
@@ -17,5 +22,8 @@ __all__ = [
     "DeterministicResponseController",
     "IdleLoopConfig",
     "IdleLoopOrchestrator",
+    "MuteAwareResponseController",
+    "MuteController",
+    "MuteState",
     "ResponseState",
 ]

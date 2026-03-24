@@ -20,6 +20,12 @@
     "output_device": "default",
     "sample_rate_hz": 16000
   },
+  "stt": {
+    "engine": "vosk",
+    "model_path": "models/vosk/vosk-model-small-en-us-0.15",
+    "language": "en",
+    "fallback_engine": null
+  },
   "tts": {
     "engine": "pyttsx3",
     "speech_rate": 150,

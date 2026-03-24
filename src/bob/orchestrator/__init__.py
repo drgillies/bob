@@ -15,6 +15,10 @@ from bob.orchestrator.response_flow import (
     DeterministicResponseController,
     ResponseState,
 )
+from bob.orchestrator.transcription_flow import (
+    WakeTriggeredTranscription,
+    WakeTriggeredTranscriptionController,
+)
 from bob.orchestrator.utterance_flow import (
     WakeTriggeredUtterance,
     WakeTriggeredUtteranceController,
@@ -30,6 +34,8 @@ __all__ = [
     "MuteController",
     "MuteState",
     "ResponseState",
+    "WakeTriggeredTranscription",
+    "WakeTriggeredTranscriptionController",
     "WakeTriggeredUtterance",
     "WakeTriggeredUtteranceController",
 ]

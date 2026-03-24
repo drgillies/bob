@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-011: M2 STT adapter + default implementation
-- [ ] Status: Backlog
-- Size: L
-- Objective: Add STT interface and default engine implementation with typed error handling.
-- Business Value: Decouples engine choice and reduces vendor/library lock-in.
-- Inputs/Context: `docs/deep-research-report.md` (M2-03, M2-04), `docs/architecture.md`.
-- Target Files/Paths: `src/stt/`, `src/data/model/`, `src/orchestrator/`, `tests/`.
-- Implementation Notes: `transcribe(...) -> text + metadata`; fallback selection via config.
-- Constraints/Standards: Offline mode supported; no orchestrator crash on STT errors.
-- Tests Required: Unit tests for adapter contract and error paths.
-- Done Criteria: Default STT works; fallback switching path exists.
-- Deliverable Format: Code + contract tests + config update.
-
 ### TASK-012: M2 intent router and core intents
 - [ ] Status: Backlog
 - Size: L
@@ -340,6 +327,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 36 passed, 1 skipped; manual `_testing.py utterance-record` validated both timeout-with-silence and end-of-speech-with-audio behavior.
 - Ticket Record: `planning/tickets/TASK-010.md`
 
+### TASK-011: M2 STT adapter + default implementation
+- [x] Status: Done
+- Size: L
+- Completed: 2026-03-24
+- Outcome: Added a typed STT service boundary, default Vosk adapter, service factory, and wake-to-transcription orchestration built on the utterance recorder.
+- Verification: `python -m pytest -q` -> 47 passed, 1 skipped; `python _testing.py stt-fake` produced a deterministic transcript; real adapter checks via `_testing.py stt-vosk` transcribed `_stt_sample.wav` as `what time is it` and user-recorded `my_test.wav` without crashing.
+- Ticket Record: `planning/tickets/TASK-011.md`
+
 ---
 
 ## Usage Notes
@@ -347,4 +342,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-010`: `TASK-011`.
+- Recommended next ticket after `TASK-011`: `TASK-012`.

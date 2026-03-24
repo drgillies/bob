@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-010: M2 utterance recording with end-of-speech VAD
-- [ ] Status: Backlog
-- Size: M
-- Objective: Record post-wake utterances and stop on end-of-speech with timeout fallback.
-- Business Value: Enables reliable STT input and faster response loop.
-- Inputs/Context: `docs/deep-research-report.md` (M2-02).
-- Target Files/Paths: `src/audio/`, `src/stt/`, `src/orchestrator/`, `tests/`.
-- Implementation Notes: Include trailing buffer and silence timeout.
-- Constraints/Standards: Stop within ~0.5-1.0s after user speech in typical conditions.
-- Tests Required: Integration tests for VAD-stop and timeout scenarios.
-- Done Criteria: End-of-speech and timeout behavior validated.
-- Deliverable Format: Code + test logs.
-
 ### TASK-011: M2 STT adapter + default implementation
 - [ ] Status: Backlog
 - Size: L
@@ -345,6 +332,14 @@ No tasks currently in review.
 - Verification: Local Windows feasibility checks showed `vosk`, `faster-whisper`, and `whispercpp` all imported successfully; `Vosk` was recorded as the lowest-friction default path.
 - Ticket Record: `planning/tickets/TASK-009.md`
 
+### TASK-010: M2 utterance recording with end-of-speech VAD
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-24
+- Outcome: Added an energy-based utterance recorder with trailing silence retention, typed stop reasons, and wake-to-utterance orchestration ready for STT integration.
+- Verification: `python -m pytest -q` -> 36 passed, 1 skipped; manual `_testing.py utterance-record` validated both timeout-with-silence and end-of-speech-with-audio behavior.
+- Ticket Record: `planning/tickets/TASK-010.md`
+
 ---
 
 ## Usage Notes
@@ -352,4 +347,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-009`: `TASK-010`.
+- Recommended next ticket after `TASK-010`: `TASK-011`.

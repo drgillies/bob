@@ -31,6 +31,18 @@ class AudioCaptureConfig:
         """Compute callback frame block size in samples."""
         return int(self.sample_rate_hz * (self.frame_duration_ms / 1000.0))
 
+    @property
+    def frame_duration_seconds(self) -> float:
+        """Return the callback frame duration in seconds."""
+        return self.frame_duration_ms / 1000.0
+
+    @property
+    def sample_width_bytes(self) -> int:
+        """Return the sample width for the configured dtype."""
+        if self.dtype == "int16":
+            return 2
+        raise ValueError(f"Unsupported audio dtype for sample width lookup: {self.dtype}")
+
 
 class AudioCaptureService:
     """Capture microphone frames through a non-blocking callback queue."""

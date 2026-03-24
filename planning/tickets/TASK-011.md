@@ -32,6 +32,7 @@
   - `src/bob/data/model/`
   - `tests/`
   - `config/settings.example.json`
+  - `models/`
   - `_testing.py`
 
 ## Implementation Notes
@@ -71,6 +72,7 @@
   - User-recorded validation passed with:
     - `uv run --with-requirements requirements.txt -- python _testing.py stt-vosk --model-path models/vosk/vosk-model-small-en-us-0.15 --wav my_test.wav`
     - Output included `transcript: the alias aden is the smell is person i know`, `engine: vosk`, and `audio duration: 3.28`.
+  - Follow-up repo update: committed the extracted default Vosk model under `models/vosk/vosk-model-small-en-us-0.15` so the real manual STT path is reproducible on the repo checkout without an extra model download step.
 
 ## Done Criteria
 - [x] Minimum completion conditions for the agent:
@@ -89,7 +91,7 @@
 ## Execution Log
 - [x] Agent: `Codex`
 - [x] Started: `2026-03-24`
-- [x] Latest Update: `Validated the real Vosk adapter with both a generated WAV sample and a user-recorded WAV sample.`
+- [x] Latest Update: `Committed the extracted default Vosk model to the repository and ignored future model ZIP archives.`
 - [x] Blockers: `None`
 - [x] Completed: `2026-03-24`
 - [x] Merge Commit (if merged): `519b54f`

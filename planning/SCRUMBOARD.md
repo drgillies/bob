@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-015: M3 centralized config loader and schema validation
-- [ ] Status: Backlog
-- Size: M
-- Objective: Implement config loading with `settings.local.json` overrides and `.env` secrets only.
-- Business Value: Safe, consistent runtime behavior across machines.
-- Inputs/Context: `docs/deep-research-report.md` (M3-01), `docs/configuration.md`.
-- Target Files/Paths: `src/config/`, `config/settings.example.json`, `.env.example`, `tests/`.
-- Implementation Notes: Consider Pydantic Settings or lightweight typed validator.
-- Constraints/Standards: `.env` secrets-only rule; no secrets in logs.
-- Tests Required: Unit tests for merge order, validation, and missing/invalid keys.
-- Done Criteria: Config load path centralized and documented.
-- Deliverable Format: Code + tests + docs update.
-
 ### TASK-016: M3 logging, health metrics, and watchdog
 - [ ] Status: Backlog
 - Size: M
@@ -320,6 +307,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 75 passed, 1 skipped; `_testing.py session-runtime-fake` recorded the in-memory turn state; `_testing.py session-runtime-fake --tts-fail` recorded a recovered `TTS` error without crashing.
 - Ticket Record: `planning/tickets/TASK-014.md`
 
+### TASK-015: M3 centralized config loader and schema validation
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-24
+- Outcome: Added a centralized validated config loader with example/local layering, supported secret loading, and shared config access helpers for runtime callers.
+- Verification: `python -m pytest -q` -> 82 passed, 1 skipped; `_testing.py config-summary --config config/settings.example.json` printed a safe validated summary; `_testing.py open-app-real --app calculator --config config/settings.example.json` still launched Calculator via the centralized config path.
+- Ticket Record: `planning/tickets/TASK-015.md`
+
 ---
 
 ## Usage Notes
@@ -327,4 +322,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-014`: `TASK-015`.
+- Recommended next ticket after `TASK-015`: `TASK-016`.

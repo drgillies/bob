@@ -7,6 +7,7 @@ from datetime import datetime
 from typing import Callable
 
 from bob.data.model import IntentMatch, IntentName, IntentResponse
+from bob.skills.actions import LocalActionError, OpenAppAction
 
 
 @dataclass(frozen=True)
@@ -33,9 +34,11 @@ class CoreIntentHandler:
         config: CoreIntentHandlerConfig | None = None,
         *,
         now_fn: Callable[[], datetime] = datetime.now,
+        open_app_action: OpenAppAction | None = None,
     ) -> None:
         self._config = config or CoreIntentHandlerConfig()
         self._now_fn = now_fn
+        self._open_app_action = open_app_action
 
     def handle(self, match: IntentMatch) -> IntentResponse:
         """Return the response for a matched intent."""
@@ -71,10 +74,28 @@ class CoreIntentHandler:
 
         if match.name == IntentName.OPEN_APP:
             app_name = match.slots.get("app_name", "that app")
+            if self._open_app_action is None:
+                return IntentResponse(
+                    intent=IntentName.OPEN_APP,
+                    text=f"I heard open {app_name}, but app launching is not enabled yet.",
+                    metadata={"app_name": app_name},
+                )
+
+            try:
+                result = self._open_app_action.execute(app_name)
+            except LocalActionError:
+                return IntentResponse(
+                    intent=IntentName.OPEN_APP,
+                    text=f"I tried to open {app_name}, but the launch failed.",
+                    handled=False,
+                    metadata={"app_name": app_name},
+                )
+
             return IntentResponse(
                 intent=IntentName.OPEN_APP,
-                text=f"I heard open {app_name}, but app launching is not enabled yet.",
-                metadata={"app_name": app_name},
+                text=result.message,
+                handled=result.succeeded,
+                metadata=result.metadata,
             )
 
         if match.name == IntentName.PLAY_MEDIA:

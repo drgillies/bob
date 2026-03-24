@@ -46,3 +46,12 @@ class IntentResponse:
     text: str
     handled: bool = True
     metadata: dict[str, str] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class ActionResult:
+    """Result from a local action execution."""
+
+    succeeded: bool
+    message: str
+    metadata: dict[str, str] = field(default_factory=dict)

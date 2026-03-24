@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-012: M2 intent router and core intents
-- [ ] Status: Backlog
-- Size: L
-- Objective: Implement deterministic intent router with exact + fuzzy matching and core intents.
-- Business Value: Delivers usable assistant behaviors for MVP command set.
-- Inputs/Context: `docs/deep-research-report.md` (M2-05, M2-06), `docs/mvp-command-list.md`.
-- Target Files/Paths: `src/skills/`, `src/orchestrator/`, `src/data/model/`, `tests/`.
-- Implementation Notes: Include unknown-intent fallback response path.
-- Constraints/Standards: Keep behavior deterministic for MVP.
-- Tests Required: Unit tests for parsing/matching and intent handlers.
-- Done Criteria: All commands in `docs/mvp-command-list.md` implemented and tested.
-- Deliverable Format: Code + tests + updated command list notes if needed.
-
 ### TASK-013: M2 local actions framework and Windows open-app skill
 - [ ] Status: Backlog
 - Size: M
@@ -335,6 +322,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 47 passed, 1 skipped; `python _testing.py stt-fake` produced a deterministic transcript; real adapter checks via `_testing.py stt-vosk` transcribed `_stt_sample.wav` as `what time is it` and user-recorded `my_test.wav` without crashing.
 - Ticket Record: `planning/tickets/TASK-011.md`
 
+### TASK-012: M2 intent router and core intents
+- [x] Status: Done
+- Size: L
+- Completed: 2026-03-24
+- Outcome: Added deterministic text normalization, intent routing, core MVP handlers, and transcription-to-intent orchestration for time/date/status/capability/fallback flows.
+- Verification: `python -m pytest -q` -> 59 passed, 1 skipped; `_testing.py intent-fake --text "what time is it"` returned `GET_TIME`; `_testing.py intent-fake --text "what date is it"` and `"what day is it"` returned `GET_DATE`.
+- Ticket Record: `planning/tickets/TASK-012.md`
+
 ---
 
 ## Usage Notes
@@ -342,4 +337,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-011`: `TASK-012`.
+- Recommended next ticket after `TASK-012`: `TASK-013`.

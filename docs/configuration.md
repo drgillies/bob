@@ -18,6 +18,24 @@
    - `.env` for sensitive values only (API keys, tokens, credentials)
 4. Keep non-sensitive shared defaults in `config/settings.example.json`; keep only secret key names/placeholders in `.env.example`.
 
+## Runtime Loader
+
+- Runtime config should be loaded through `bob.config.load_app_config()`.
+- Merge order is:
+  1. `config/settings.example.json`
+  2. `config/settings.local.json` if present
+  3. `.env` plus process environment for supported secret keys only
+- Existing callers that only need a slice can use:
+  - `bob.config.load_open_app_settings()`
+  - `bob.config.load_stt_settings()`
+
+Validation goals:
+
+- required sections must exist
+- required values must have the expected type
+- invalid JSON or malformed `.env` input fails fast with actionable errors
+- secrets are loaded, but should not be printed or logged verbatim
+
 ## Split of Responsibility
 
 - Put in `config/settings.local.json`:

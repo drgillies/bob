@@ -1,1 +1,33 @@
-"""Configuration module placeholders."""
+"""Centralized configuration loading for Bob."""
+
+from bob.config.loader import (
+    AppConfig,
+    AssistantConfig,
+    AudioConfig,
+    ConfigError,
+    OpenAppConfig,
+    ProjectConfig,
+    SecretConfig,
+    SttConfig,
+    TimeoutConfig,
+    TtsConfig,
+    load_app_config,
+    load_open_app_settings,
+    load_stt_settings,
+)
+
+__all__ = [
+    "AppConfig",
+    "AssistantConfig",
+    "AudioConfig",
+    "ConfigError",
+    "OpenAppConfig",
+    "ProjectConfig",
+    "SecretConfig",
+    "SttConfig",
+    "TimeoutConfig",
+    "TtsConfig",
+    "load_app_config",
+    "load_open_app_settings",
+    "load_stt_settings",
+]

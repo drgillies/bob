@@ -33,6 +33,7 @@
     "engine": "vosk",
     "model_path": "models/vosk/vosk-model-small-en-us-0.15",
     "language": "en",
+    "sample_rate_hz": 16000,
     "fallback_engine": null
   },
   "tts": {

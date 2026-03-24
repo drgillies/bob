@@ -13,7 +13,7 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from bob.data.model import IntentMatch, IntentName
-from bob.skills import CoreIntentHandler
+from bob.skills import CoreIntentHandler, OpenAppAction, OpenAppActionConfig
 
 
 def test_time_handler_returns_formatted_time() -> None:
@@ -49,6 +49,35 @@ def test_open_app_handler_returns_safe_placeholder_response() -> None:
     assert response.intent == IntentName.OPEN_APP
     assert "calculator" in response.text
     assert response.metadata["app_name"] == "calculator"
+
+
+def test_open_app_handler_uses_action_result_when_action_is_configured() -> None:
+    launched: list[str] = []
+
+    def fake_launcher(command: str) -> object:
+        launched.append(command)
+        return object()
+
+    handler = CoreIntentHandler(
+        open_app_action=OpenAppAction(
+            OpenAppActionConfig(enabled=True, aliases={"calculator": "calc.exe"}),
+            launcher=fake_launcher,
+        )
+    )
+
+    response = handler.handle(
+        IntentMatch(
+            IntentName.OPEN_APP,
+            1.0,
+            "open <app>",
+            slots={"app_name": "calculator"},
+        )
+    )
+
+    assert response.intent == IntentName.OPEN_APP
+    assert response.handled is True
+    assert response.text == "Opening calculator."
+    assert launched == ["calc.exe"]
 
 
 def test_unknown_handler_returns_fallback_response() -> None:

@@ -20,6 +20,15 @@
     "output_device": "default",
     "sample_rate_hz": 16000
   },
+  "actions": {
+    "open_app": {
+      "enabled": true,
+      "aliases": {
+        "calculator": "calc.exe",
+        "notepad": "notepad.exe"
+      }
+    }
+  },
   "stt": {
     "engine": "vosk",
     "model_path": "models/vosk/vosk-model-small-en-us-0.15",

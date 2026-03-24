@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-013: M2 local actions framework and Windows open-app skill
-- [ ] Status: Backlog
-- Size: M
-- Objective: Add pluggable skills framework and implement `open <app>` with config mapping.
-- Business Value: Enables first practical local action capability.
-- Inputs/Context: `docs/deep-research-report.md` (M2-07, M2-08).
-- Target Files/Paths: `src/skills/`, `config/settings.example.json`, `tests/`, `docs/mvp-command-list.md`.
-- Implementation Notes: Feature-flag optional media controls; graceful unsupported response.
-- Constraints/Standards: No privileged keylogging behavior by default.
-- Tests Required: Integration tests for known app, missing app, disabled skill.
-- Done Criteria: Open-app flow works with useful errors and config toggles.
-- Deliverable Format: Code + config docs + tests.
-
 ### TASK-014: M2 session memory and error-handling policy
 - [ ] Status: Backlog
 - Size: M
@@ -330,6 +317,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 59 passed, 1 skipped; `_testing.py intent-fake --text "what time is it"` returned `GET_TIME`; `_testing.py intent-fake --text "what date is it"` and `"what day is it"` returned `GET_DATE`.
 - Ticket Record: `planning/tickets/TASK-012.md`
 
+### TASK-013: M2 local actions framework and Windows open-app skill
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-24
+- Outcome: Added a config-driven local action layer and wired `open <app>` to a Windows-safe launcher with known/unknown/disabled behavior.
+- Verification: `python -m pytest -q` -> 68 passed, 1 skipped; `_testing.py open-app-fake --app calculator` resolved `calc.exe`; `_testing.py open-app-real --app calculator` successfully opened Calculator.
+- Ticket Record: `planning/tickets/TASK-013.md`
+
 ---
 
 ## Usage Notes
@@ -337,4 +332,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-012`: `TASK-013`.
+- Recommended next ticket after `TASK-013`: `TASK-014`.

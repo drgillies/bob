@@ -16,6 +16,13 @@ from bob.orchestrator.response_flow import (
     DeterministicResponseController,
     ResponseState,
 )
+from bob.orchestrator.session_runtime import (
+    AssistantCycleResult,
+    SessionAwareAssistantController,
+    SessionMemoryConfig,
+    SessionMemoryStore,
+    classify_runtime_error,
+)
 from bob.orchestrator.transcription_flow import (
     WakeTriggeredTranscription,
     WakeTriggeredTranscriptionController,
@@ -27,6 +34,7 @@ from bob.orchestrator.utterance_flow import (
 
 __all__ = [
     "AssistantState",
+    "AssistantCycleResult",
     "DeterministicResponseConfig",
     "DeterministicResponseController",
     "IdleLoopConfig",
@@ -37,8 +45,12 @@ __all__ = [
     "MuteState",
     "ResponseState",
     "RoutedTranscription",
+    "SessionAwareAssistantController",
+    "SessionMemoryConfig",
+    "SessionMemoryStore",
     "WakeTriggeredTranscription",
     "WakeTriggeredTranscriptionController",
     "WakeTriggeredUtterance",
     "WakeTriggeredUtteranceController",
+    "classify_runtime_error",
 ]

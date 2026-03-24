@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-014: M2 session memory and error-handling policy
-- [ ] Status: Backlog
-- Size: M
-- Objective: Implement session-only memory and create `docs/error-handling-policy.md`.
-- Business Value: Improves conversational continuity and runtime resilience.
-- Inputs/Context: `docs/deep-research-report.md` (M2-10, M2-11), `docs/basic-scope.md`.
-- Target Files/Paths: `src/orchestrator/`, `src/data/model/`, `docs/error-handling-policy.md`, `tests/`.
-- Implementation Notes: Memory cleared on restart; define retry/reset/fail strategy per component.
-- Constraints/Standards: No raw audio persistence by default.
-- Tests Required: Unit tests for memory lifecycle and error recovery paths.
-- Done Criteria: Policy doc exists; transient failures recover to IDLE.
-- Deliverable Format: Doc + code + tests.
-
 ### TASK-015: M3 centralized config loader and schema validation
 - [ ] Status: Backlog
 - Size: M
@@ -325,6 +312,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 68 passed, 1 skipped; `_testing.py open-app-fake --app calculator` resolved `calc.exe`; `_testing.py open-app-real --app calculator` successfully opened Calculator.
 - Ticket Record: `planning/tickets/TASK-013.md`
 
+### TASK-014: M2 session memory and error-handling policy
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-24
+- Outcome: Added runtime-only session memory, resilient recovery paths that return Bob to `IDLE`, and a component-level error-handling policy doc.
+- Verification: `python -m pytest -q` -> 75 passed, 1 skipped; `_testing.py session-runtime-fake` recorded the in-memory turn state; `_testing.py session-runtime-fake --tts-fail` recorded a recovered `TTS` error without crashing.
+- Ticket Record: `planning/tickets/TASK-014.md`
+
 ---
 
 ## Usage Notes
@@ -332,4 +327,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-013`: `TASK-014`.
+- Recommended next ticket after `TASK-014`: `TASK-015`.

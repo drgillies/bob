@@ -7,6 +7,7 @@ from enum import Enum
 from time import monotonic
 from typing import Callable, Protocol
 
+from bob.data.model import ErrorComponent, RecoveryEvent
 from bob.wakeword import WakeDetectionEvent, WakeWordDetector
 
 
@@ -52,12 +53,14 @@ class IdleLoopOrchestrator:
         *,
         time_fn: Callable[[], float] = monotonic,
         state_callback: Callable[[AssistantState], None] | None = None,
+        error_callback: Callable[[RecoveryEvent], None] | None = None,
     ) -> None:
         self._audio_source = audio_source
         self._detector = detector
         self._config = config or IdleLoopConfig()
         self._time_fn = time_fn
         self._state_callback = state_callback
+        self._error_callback = error_callback
         self._state = AssistantState.IDLE
         self._last_trigger_time: float | None = None
 
@@ -79,13 +82,21 @@ class IdleLoopOrchestrator:
 
     def poll_once(self) -> WakeDetectionEvent | None:
         """Process one frame from the audio source."""
-        frame = self._audio_source.read_frame(
-            timeout_seconds=self._config.read_timeout_seconds
-        )
+        try:
+            frame = self._audio_source.read_frame(
+                timeout_seconds=self._config.read_timeout_seconds
+            )
+        except Exception as exc:
+            self._recover_from_error(ErrorComponent.AUDIO, exc, restart_audio=True)
+            return None
         if frame is None:
             return None
 
-        detection = self._detector.process_frame(frame)
+        try:
+            detection = self._detector.process_frame(frame)
+        except Exception as exc:
+            self._recover_from_error(ErrorComponent.WAKEWORD, exc, restart_audio=False)
+            return None
         if detection is None:
             return None
 
@@ -103,9 +114,37 @@ class IdleLoopOrchestrator:
         """Return the assistant to idle after wake handling completes."""
         self._set_state(AssistantState.IDLE)
 
+    def recover_to_idle(self, *, restart_audio: bool = False) -> None:
+        """Best-effort recovery path that returns the runtime to IDLE."""
+        if restart_audio and self._audio_source.is_running():
+            try:
+                self._audio_source.stop()
+            except Exception:
+                pass
+            try:
+                self._audio_source.start()
+            except Exception:
+                pass
+        try:
+            self._detector.reset()
+        except Exception:
+            pass
+        self._set_state(AssistantState.IDLE)
+
     def _set_state(self, state: AssistantState) -> None:
         if self._state == state:
             return
         self._state = state
         if self._state_callback is not None:
             self._state_callback(state)
+
+    def _recover_from_error(
+        self,
+        component: ErrorComponent,
+        exc: Exception,
+        *,
+        restart_audio: bool,
+    ) -> None:
+        self.recover_to_idle(restart_audio=restart_audio)
+        if self._error_callback is not None:
+            self._error_callback(RecoveryEvent(component=component, message=str(exc)))

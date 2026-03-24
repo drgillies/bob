@@ -7,11 +7,21 @@ from bob.data.model.intent import (
     IntentRequest,
     IntentResponse,
 )
+from bob.data.model.session import (
+    ErrorComponent,
+    RecoveryEvent,
+    SessionMemorySnapshot,
+    SessionTurn,
+)
 
 __all__ = [
     "ActionResult",
+    "ErrorComponent",
     "IntentMatch",
     "IntentName",
     "IntentRequest",
     "IntentResponse",
+    "RecoveryEvent",
+    "SessionMemorySnapshot",
+    "SessionTurn",
 ]

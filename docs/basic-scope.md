@@ -147,8 +147,8 @@ Completed:
 2. `docs/mvp-command-list.md` with initial supported phrases/intents.
 3. `docs/setup-target-machine.md` for old-computer install steps.
 4. `docs/benchmark-baseline.md` with wake-word and STT spike findings plus benchmark procedures.
+5. `docs/error-handling-policy.md` defining retry/recover/fail behavior by component and session-memory privacy rules.
 
 Next:
 1. Extend `docs/benchmark-baseline.md` with target-machine CPU/memory/latency measurements.
-2. `docs/error-handling-policy.md` defining retry/recover/fail behavior by component.
-3. `docs/service-mode.md` with startup mode decision and operational steps.
+2. `docs/service-mode.md` with startup mode decision and operational steps.

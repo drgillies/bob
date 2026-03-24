@@ -80,4 +80,4 @@
 - [x] Latest Update: `Manual validation passed for both timeout-with-silence and end-of-speech-with-audio scenarios.`
 - [x] Blockers: `None`
 - [x] Completed: `2026-03-24`
-- [ ] Merge Commit (if merged):
+- [x] Merge Commit (if merged): `69399f3`

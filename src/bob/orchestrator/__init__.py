@@ -5,6 +5,7 @@ from bob.orchestrator.idle_loop import (
     IdleLoopConfig,
     IdleLoopOrchestrator,
 )
+from bob.orchestrator.intent_flow import IntentResponseController, RoutedTranscription
 from bob.orchestrator.mute_control import (
     MuteAwareResponseController,
     MuteController,
@@ -30,10 +31,12 @@ __all__ = [
     "DeterministicResponseController",
     "IdleLoopConfig",
     "IdleLoopOrchestrator",
+    "IntentResponseController",
     "MuteAwareResponseController",
     "MuteController",
     "MuteState",
     "ResponseState",
+    "RoutedTranscription",
     "WakeTriggeredTranscription",
     "WakeTriggeredTranscriptionController",
     "WakeTriggeredUtterance",

@@ -59,6 +59,7 @@ class WakeWordConfig:
     engine: str
     keyword: str
     threshold: float
+    phrase: str | None = None
     model_path: str | None = None
     inference_framework: str | None = None
 
@@ -208,6 +209,7 @@ def load_wakeword_settings(
     )
     return {
         "engine": config.wakeword.engine,
+        "phrase": config.wakeword.phrase,
         "keyword": config.wakeword.keyword,
         "threshold": config.wakeword.threshold,
         "model_path": config.wakeword.model_path,
@@ -330,6 +332,7 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
                 minimum=0.0,
                 maximum=1.0,
             ),
+            phrase=_optional_str(wakeword, "phrase"),
             model_path=_optional_str(wakeword, "model_path"),
             inference_framework=_optional_choice(
                 wakeword,

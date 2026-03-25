@@ -69,24 +69,13 @@ Notes:
 
 ## Backlog
 
-No tasks currently in backlog.
+- Restore product wake phrase by sourcing/training `hey_bob.onnx`.
 
 ---
 
 ## To Do
 
-### TASK-027: Source or train hey_bob.onnx for openWakeWord
-- [ ] Status: To Do
-- Size: L
-- Objective: Produce or validate a compatible custom `hey_bob.onnx` artifact for the local-first `openWakeWord` path.
-- Business Value: Resolves the remaining blocker to real spoken `Hey Bob` wake-word validation.
-- Inputs/Context: `TASK-024`, `TASK-025`, `TASK-026`, `docs/openwakeword-custom-model.md`.
-- Target Files/Paths: model artifact path, supporting docs, and `planning/tickets/TASK-027.md`.
-- Implementation Notes: Stay local-first, avoid vendor-key paths, and document licensing/training constraints honestly.
-- Constraints/Standards: No API-key wake engine in the default path.
-- Tests Required: Real spoken validation if a compatible model artifact is produced.
-- Done Criteria: Model artifact outcome is proven, or the blocker is narrowed further with concrete evidence.
-- Deliverable Format: Artifact/training outcome plus validation evidence.
+No tasks currently in To Do.
 
 ---
 
@@ -97,6 +86,7 @@ No tasks currently in progress.
 ---
 
 ## In Review
+
 No tasks currently in review.
 
 ---
@@ -311,6 +301,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> `100 passed, 1 skipped`; manual `_testing.py wake-openwakeword-live --seconds 1` loaded the configured custom model path and failed fast because `models/wakeword/openwakeword/hey_bob.onnx` does not exist yet.
 - Ticket Record: `planning/tickets/TASK-026.md`
 
+### TASK-027: Source or train hey_bob.onnx for openWakeWord
+- [x] Status: Done
+- Size: L
+- Completed: 2026-03-25
+- Outcome: Proved Bob's live `openWakeWord` runtime works on the target machine, added a temporary engineering phrase using upstream `yo_homie.onnx`, and narrowed the remaining product-facing blocker to the missing `hey_bob.onnx` artifact.
+- Verification: `python -m pytest -q` -> `100 passed, 1 skipped`; real spoken `_testing.py wake-openwakeword-live --seconds 5 --use-builtin --wake-phrase "Hey Jarvis" --keyword hey_jarvis` triggered successfully; real spoken `_testing.py wake-openwakeword-live --seconds 10` triggered successfully for `Yo homie` and produced `IDLE -> TRIGGERED -> IDLE`.
+- Ticket Record: `planning/tickets/TASK-027.md`
+
 ---
 
 ## Usage Notes
@@ -318,7 +316,7 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-025`: `TASK-026`.
+- Recommended next ticket: restore the product wake phrase by sourcing/training `hey_bob.onnx`.
 
 
 

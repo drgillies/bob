@@ -219,6 +219,33 @@ Observed integration result on 2026-03-25:
 See:
 - `docs/openwakeword-custom-model.md`
 
+## TASK-027 Artifact Result
+
+Observed sourcing/training result on 2026-03-25:
+- the referenced Home Assistant community wakeword collection did not include a `Bob`/`hey_bob` model artifact
+- the official automated `openWakeWord` training notebook explicitly states that automated custom-model training is currently supported on Linux only because of the Piper-based sample-generation requirements
+- therefore the remaining blocker is not adapter support and not model-path wiring; it is the absence of a compatible artifact plus the lack of a supported Windows-local official training path
+
+Recommended next step:
+- produce a baseline `hey_bob.onnx` with the official automated training flow in Linux or Google Colab, then validate it locally in Bob's Windows runtime
+
+Temporary engineering unblocker recorded on 2026-03-25:
+- a community `yo_homie.onnx` model exists upstream
+- Bob can use `Yo homie` as a temporary engineering wake phrase to unblock real wake-word testing
+- this does not replace the product phrase decision of `Hey Bob`
+- local validation now confirms the `yo_homie.onnx` model initializes successfully in Bob's current Windows runtime
+
+Observed live validation result after the frame-format fix:
+- Bob's live `openWakeWord` path works on this machine when fed correctly formatted `int16` audio frames
+- real spoken built-in `Hey Jarvis` triggered successfully with score `0.9556882381439209`
+- real spoken `Yo homie` triggered successfully with score `0.99876868724823`
+- Bob reported `IDLE -> TRIGGERED -> IDLE` in both cases
+
+Current conclusion:
+- `openWakeWord` is viable in Bob's Windows runtime
+- `Yo homie` is a working temporary engineering phrase
+- the remaining product-facing blocker is specifically the missing `hey_bob.onnx` model artifact, not a generic engine/runtime failure
+
 ---
 
 ## STT Spike

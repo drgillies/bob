@@ -6,6 +6,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
+import numpy as np
+
 from bob.wakeword.service import WakeDetectionEvent
 
 
@@ -36,7 +38,7 @@ class OpenWakeWordDetector:
         self._model = self._build_model(model_factory)
 
     def process_frame(self, frame: bytes) -> WakeDetectionEvent | None:
-        predictions = self._model.predict(frame)
+        predictions = self._model.predict(self._prepare_frame(frame))
         score = predictions.get(self._config.keyword)
         if score is None:
             return None
@@ -64,6 +66,14 @@ class OpenWakeWordDetector:
             return sorted(str(name) for name in models.keys())
 
         return []
+
+    @staticmethod
+    def _prepare_frame(frame: bytes | bytearray | memoryview | np.ndarray) -> np.ndarray:
+        if isinstance(frame, np.ndarray):
+            return frame.astype(np.int16, copy=False)
+        if isinstance(frame, (bytes, bytearray, memoryview)):
+            return np.frombuffer(frame, dtype=np.int16)
+        raise WakeWordError(f"Unsupported frame type for openWakeWord: {type(frame)!r}")
 
     def _build_model(self, model_factory: Callable[..., Any] | None) -> Any:
         model_kwargs = dict(self._config.model_kwargs)

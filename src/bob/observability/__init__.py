@@ -3,6 +3,12 @@
 from bob.observability.health import HealthConfig, HealthMonitor, HealthSnapshot
 from bob.observability.logging_setup import LoggingConfig, configure_logging
 from bob.observability.state_tracker import StateTracker
+from bob.observability.stability_harness import (
+    StabilityHarness,
+    StabilityHarnessConfig,
+    StabilityRunResult,
+    StabilitySample,
+)
 
 __all__ = [
     "HealthConfig",
@@ -10,5 +16,9 @@ __all__ = [
     "HealthSnapshot",
     "LoggingConfig",
     "StateTracker",
+    "StabilityHarness",
+    "StabilityHarnessConfig",
+    "StabilityRunResult",
+    "StabilitySample",
     "configure_logging",
 ]

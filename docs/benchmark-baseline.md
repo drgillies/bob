@@ -311,3 +311,90 @@ Suggested config fields:
 - Vosk models: https://alphacephei.com/vosk/models
 - faster-whisper GitHub README: https://github.com/SYSTRAN/faster-whisper
 - whisper.cpp GitHub README: https://github.com/ggml-org/whisper.cpp
+
+---
+
+## Long-Session Stability Baseline
+
+## Purpose
+
+Define the repeatable validation procedure Bob should use for Milestone 3 stability work.
+
+Goal:
+- continuous run target of 4+ hours
+- no crash
+- bounded memory drift
+- watchdog recovery events visible in the artifact/log output
+
+## Harness
+
+Test-mode harness:
+- `bob.observability.StabilityHarness`
+
+Manual smoke command:
+
+```powershell
+uv run --with-requirements requirements.txt -- python _testing.py stability-harness-fake --output artifacts/stability-smoke.json
+```
+
+Expected smoke result:
+- writes a JSON artifact
+- prints sample count, recovery count, RSS drift, and pass/fail status
+
+## Target-Machine Procedure
+
+1. Prepare the machine
+- close unrelated high-load apps
+- confirm the intended Bob config is active
+- ensure local logs are writable
+
+2. Run the harness in a long session
+- target duration: `14400` seconds minimum
+- sample interval: `60` seconds
+- record:
+  - uptime
+  - CPU percent
+  - RSS memory
+  - watchdog-triggered recoveries
+
+3. Save the run artifact
+- store the JSON artifact from the harness
+- keep the corresponding log file for the same run window
+
+4. Review pass/fail
+- pass if:
+  - no crash occurred
+  - RSS drift stays within the agreed threshold
+  - watchdog recoveries, if any, do not leave Bob stuck
+- fail if:
+  - process exits unexpectedly
+  - RSS grows continuously beyond threshold
+  - repeated watchdog resets indicate a persistent fault
+
+## Initial Pass Criteria
+
+Suggested initial thresholds for old target hardware:
+- maximum allowed RSS drift over run: `128 MB`
+- crash count: `0`
+- watchdog recovery events: acceptable if isolated and Bob continues running
+
+These are baseline thresholds, not final release thresholds. Tighten them after the first target-machine run.
+
+## Artifact Shape
+
+The JSON artifact should include:
+- duration seconds
+- sample interval seconds
+- sample count
+- recovery count
+- initial RSS bytes
+- final RSS bytes
+- max RSS bytes
+- RSS drift bytes
+- pass/fail
+- sampled health points
+
+## Notes
+
+- This harness is intentionally test-mode focused. It validates stability plumbing and benchmark procedure without requiring a 4-hour live voice interaction.
+- Do not persist raw audio by default as part of the stability run.

@@ -14,3 +14,6 @@ _testing.py
 
 # Model download archives
 models/**/*.zip
+
+# Local benchmark and harness artifacts
+artifacts/

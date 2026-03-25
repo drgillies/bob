@@ -62,6 +62,7 @@ Validation goals:
 - `audio.sample_rate_hz`
 - `audio.watchdog_timeout_seconds`
 - `wakeword.engine`
+- `wakeword.phrase`
 - `wakeword.keyword`
 - `wakeword.threshold`
 - `wakeword.model_path`
@@ -80,8 +81,9 @@ Validation goals:
 
 - Bob's default local-first wake-word direction is `openWakeWord`
 - shared config now includes a `wakeword` section for custom model loading
-- expected local custom model path is `models/wakeword/openwakeword/hey_bob.onnx`
-- that model file is not assumed to exist on every machine; until it exists, real spoken validation remains blocked
+- current temporary engineering model path is `models/wakeword/openwakeword/yo_homie.onnx`
+- current temporary engineering phrase is `Yo homie`
+- this does not replace the product phrase `Hey Bob`; it only unblocks current engineering validation
 
 See:
 - `docs/openwakeword-custom-model.md`

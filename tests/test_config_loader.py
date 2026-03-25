@@ -47,9 +47,10 @@ def base_payload() -> dict:
         },
         "wakeword": {
             "engine": "openwakeword",
-            "keyword": "hey_bob",
+            "phrase": "Yo homie",
+            "keyword": "yo_homie",
             "threshold": 0.5,
-            "model_path": "models/wakeword/openwakeword/hey_bob.onnx",
+            "model_path": "models/wakeword/openwakeword/yo_homie.onnx",
             "inference_framework": "onnx",
         },
         "actions": {
@@ -114,8 +115,9 @@ def test_load_app_config_merges_example_and_local_override(tmp_path: Path) -> No
     }
     assert config.stt.sample_rate_hz == 22050
     assert config.audio.watchdog_timeout_seconds == 5
-    assert config.wakeword.keyword == "hey_bob"
-    assert config.wakeword.model_path == "models/wakeword/openwakeword/hey_bob.onnx"
+    assert config.wakeword.phrase == "Yo homie"
+    assert config.wakeword.keyword == "yo_homie"
+    assert config.wakeword.model_path == "models/wakeword/openwakeword/yo_homie.onnx"
     assert config.privacy.allow_debug_audio_capture is False
     assert config.tts.preferred_gender == "male"
     assert config.tts.volume == 0.9
@@ -235,8 +237,9 @@ def test_load_wakeword_settings_returns_validated_mapping(tmp_path: Path) -> Non
     )
 
     assert settings["engine"] == "openwakeword"
-    assert settings["keyword"] == "hey_bob"
-    assert settings["model_path"] == "models/wakeword/openwakeword/hey_bob.onnx"
+    assert settings["phrase"] == "Yo homie"
+    assert settings["keyword"] == "yo_homie"
+    assert settings["model_path"] == "models/wakeword/openwakeword/yo_homie.onnx"
 
 
 def test_load_app_config_rejects_invalid_wakeword_threshold(tmp_path: Path) -> None:

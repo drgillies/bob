@@ -23,9 +23,10 @@
   },
   "wakeword": {
     "engine": "openwakeword",
-    "keyword": "hey_bob",
+    "phrase": "Yo homie",
+    "keyword": "yo_homie",
     "threshold": 0.5,
-    "model_path": "models/wakeword/openwakeword/hey_bob.onnx",
+    "model_path": "models/wakeword/openwakeword/yo_homie.onnx",
     "inference_framework": "onnx"
   },
   "actions": {

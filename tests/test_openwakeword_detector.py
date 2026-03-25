@@ -5,6 +5,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import numpy as np
+
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 SRC_DIR = ROOT_DIR / "src"
@@ -28,7 +30,7 @@ class FakeModel:
         self.class_mapping = class_mapping or {}
         self.models = models or {}
 
-    def predict(self, frame: bytes) -> dict[str, float]:
+    def predict(self, frame: object) -> dict[str, float]:
         self.frames_seen.append(frame)
         if not self._predictions:
             return {}
@@ -45,12 +47,16 @@ def test_openwakeword_detector_returns_detection_above_threshold() -> None:
         model_factory=lambda **_: model,
     )
 
-    detection = detector.process_frame(b"frame-1")
+    frame = np.array([1, -2, 300], dtype=np.int16).tobytes()
+    detection = detector.process_frame(frame)
 
     assert detection is not None
     assert detection.keyword == "hey_bob"
     assert detection.score == 0.91
-    assert model.frames_seen == [b"frame-1"]
+    seen = model.frames_seen[0]
+    assert isinstance(seen, np.ndarray)
+    assert seen.dtype == np.int16
+    assert seen.tolist() == [1, -2, 300]
 
 
 def test_openwakeword_detector_returns_none_below_threshold() -> None:
@@ -60,7 +66,7 @@ def test_openwakeword_detector_returns_none_below_threshold() -> None:
         model_factory=lambda **_: model,
     )
 
-    detection = detector.process_frame(b"frame-1")
+    detection = detector.process_frame((1).to_bytes(2, "little", signed=True))
 
     assert detection is None
 
@@ -72,7 +78,7 @@ def test_openwakeword_detector_returns_none_when_keyword_missing() -> None:
         model_factory=lambda **_: model,
     )
 
-    detection = detector.process_frame(b"frame-1")
+    detection = detector.process_frame((1).to_bytes(2, "little", signed=True))
 
     assert detection is None
 
@@ -116,6 +122,22 @@ def test_openwakeword_detector_available_keywords_reads_class_mapping() -> None:
     keywords = detector.available_keywords()
 
     assert keywords == ["hey_bob"]
+
+
+def test_openwakeword_detector_accepts_numpy_frame() -> None:
+    model = FakeModel([{"hey_bob": 0.91}])
+    detector = OpenWakeWordDetector(
+        OpenWakeWordConfig(keyword="hey_bob", threshold=0.5),
+        model_factory=lambda **_: model,
+    )
+
+    frame = np.array([1, 2, 3], dtype=np.int16)
+    detection = detector.process_frame(frame)
+
+    assert detection is not None
+    seen = model.frames_seen[0]
+    assert isinstance(seen, np.ndarray)
+    assert seen.tolist() == [1, 2, 3]
 
 
 def test_openwakeword_detector_passes_custom_model_kwargs(tmp_path: Path) -> None:

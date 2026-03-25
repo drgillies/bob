@@ -177,6 +177,33 @@ Observed Windows validation result on 2026-03-25:
 - `hey_bob` is not an included built-in keyword model
 - conclusion: real spoken validation for `Hey Bob` is currently blocked until Bob either has a custom wake-word model or changes wake engine
 
+## TASK-025 Recommendation
+
+Recommended forward path:
+- keep `Hey Bob` as the product phrase
+- keep the `src/bob/wakeword/` adapter boundary
+- keep `openWakeWord` as the wake engine direction
+- pursue custom `Hey Bob` model work for `openWakeWord` as the next implementation step
+- do not introduce vendor-key or hosted-console dependencies into the wake-word path
+
+Why this is the recommendation:
+- local validation already proved `openWakeWord` can run on Windows with downloaded ONNX assets, but it does not ship a built-in `hey_bob` model on this setup
+- the official `openWakeWord` README says custom models are possible, and the project already has the right adapter boundary to absorb that work without rewriting orchestration
+- `Hey Bob` is already finalized across Bob's product docs, so changing the phrase just to fit a bundled model would be product backtracking
+- a vendor-key path such as `Porcupine` would conflict with the explicit no-API/no-vendor-dependency constraint for the core wake flow
+
+Tradeoff summary:
+
+| Option | Pros | Cons | Recommendation |
+| --- | --- | --- | --- |
+| `openWakeWord` custom `Hey Bob` model | Preserves the preferred open-source wake engine, keeps a local-first long-term path, and respects the no-API/no-vendor-key constraint | More R&D effort, more quality uncertainty, more setup complexity, and still leaves model licensing/compliance work to check carefully | Recommended next implementation step |
+| `Porcupine` custom `Hey Bob` model | Fast custom-phrase workflow and lower implementation uncertainty | Requires AccessKey and vendor workflow; violates the no-API/no-vendor-key constraint for the wake path | Rejected for current project constraints |
+| Change the wake phrase to a built-in `openWakeWord` phrase | Lowest implementation effort | Conflicts with the finalized user-facing phrase and existing product/docs direction | Not recommended |
+
+Decision note:
+- This recommendation prioritizes architectural consistency and the explicit no-API constraint over the fastest possible unblocker.
+- Inference from the current sources and local validation: the next correct step is custom-model work on `openWakeWord`, not an engine switch that introduces a vendor key.
+
 ---
 
 ## STT Spike

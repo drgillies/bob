@@ -75,7 +75,18 @@ No tasks currently in backlog.
 
 ## To Do
 
-No tasks currently in To Do.
+### TASK-026: Custom openWakeWord Hey Bob model and integration path
+- [ ] Status: To Do
+- Size: L
+- Objective: Define and implement the practical custom-model path for real spoken `Hey Bob` support on `openWakeWord`.
+- Business Value: Moves the project from a documented wake-word blocker to an actionable local-first implementation path.
+- Inputs/Context: `TASK-024`, `TASK-025`, `docs/benchmark-baseline.md`, `docs/risk-register.md`.
+- Target Files/Paths: `src/bob/wakeword/`, config/docs, and `planning/tickets/TASK-026.md`.
+- Implementation Notes: Keep the adapter boundary, avoid vendor-key paths, and document model sourcing/training requirements honestly.
+- Constraints/Standards: No API-key wake engine in the default path.
+- Tests Required: Adapter/config tests plus real spoken validation if a usable custom model becomes available.
+- Done Criteria: Custom-model path is clearly implemented or blocked with concrete next action.
+- Deliverable Format: Model-path implementation/update plus validation steps.
 
 ---
 
@@ -86,19 +97,7 @@ No tasks currently in progress.
 ---
 
 ## In Review
-
-### TASK-025: Wake-word custom model or engine change evaluation
-- [ ] Status: In Review
-- Size: M
-- Objective: Decide whether to pursue a custom `Hey Bob` model for `openWakeWord` or change wake engine / wake phrase based on the `TASK-024` blocker result.
-- Business Value: Resolves the main blocker to real spoken wake-word support.
-- Inputs/Context: `TASK-024`, `docs/benchmark-baseline.md`, `docs/risk-register.md`.
-- Target Files/Paths: `docs/benchmark-baseline.md`, `docs/risk-register.md`, `planning/tickets/TASK-025.md`.
-- Implementation Notes: Compare custom-model cost, engine-switch cost, licensing impact, and likely wake quality.
-- Constraints/Standards: Recommendation must stay evidence-based.
-- Tests Required: Documentation review and supporting wake validation output from `TASK-024`.
-- Done Criteria: One concrete forward path is chosen and documented.
-- Deliverable Format: Recommendation doc + next-step definition.
+No tasks currently in review.
 
 ---
 
@@ -296,6 +295,14 @@ No tasks currently in progress.
 - Verification: Live validation confirmed official `openWakeWord` assets can be downloaded and ONNX initialization works on Windows, but the built-in model list does not include `hey_bob`; current machine result is that real spoken validation for `Hey Bob` remains blocked until a custom model is provided or the wake engine changes.
 - Ticket Record: `planning/tickets/TASK-024.md`
 
+### TASK-025: Wake-word custom model or engine change evaluation
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-25
+- Outcome: Evaluated the post-validation wake-word options and chose the local-first path: keep `Hey Bob`, keep `openWakeWord`, reject vendor-key wake engines, and make custom-model work the next implementation step.
+- Verification: Documentation review plus `TASK-024` validation output confirmed `hey_bob` is not a built-in `openWakeWord` model; recommendation and risk updates were recorded in `docs/benchmark-baseline.md` and `docs/risk-register.md`.
+- Ticket Record: `planning/tickets/TASK-025.md`
+
 ---
 
 ## Usage Notes
@@ -303,7 +310,7 @@ No tasks currently in progress.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-025`: create the custom `openWakeWord` `Hey Bob` model/integration ticket if this recommendation is accepted.
+- Recommended next ticket after `TASK-025`: `TASK-026`.
 
 
 

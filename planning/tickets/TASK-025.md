@@ -6,7 +6,7 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 ## Ticket Metadata
 - [x] Ticket ID: `TASK-025`
 - [x] Title: `Wake-word custom model or engine change evaluation`
-- [x] Status: `In Review`
+- [x] Status: `Done`
 - [x] Size: `M`
 - [x] Priority: `High`
 - [x] Requested By: `User`
@@ -74,5 +74,6 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [x] Latest Update: `2026-03-25`
 - [x] Blockers: `openWakeWord` does not provide a built-in `hey_bob` model on the validated Windows ONNX path.
 - [x] Completed: Recommendation recorded: keep `Hey Bob`, preserve the adapter boundary, reject vendor-key wake-engine paths for now, and make custom `openWakeWord` model work the next implementation step.
-- [ ] Merge Commit (if merged):
+- [x] Merge Commit (if merged): `1bf9bf6`
+
 

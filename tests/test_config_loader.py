@@ -37,6 +37,7 @@ def base_payload() -> dict:
             "input_device": "default",
             "output_device": "default",
             "sample_rate_hz": 16000,
+            "watchdog_timeout_seconds": 5,
         },
         "actions": {
             "open_app": {
@@ -54,6 +55,13 @@ def base_payload() -> dict:
             "engine": "pyttsx3",
             "speech_rate": 150,
             "voice_id": None,
+        },
+        "observability": {
+            "logs_directory": "logs",
+            "log_filename": "bob.log",
+            "log_max_bytes": 1048576,
+            "log_backup_count": 3,
+            "health_summary_interval_seconds": 300,
         },
     }
 
@@ -86,6 +94,7 @@ def test_load_app_config_merges_example_and_local_override(tmp_path: Path) -> No
         "notepad": "notepad.exe",
     }
     assert config.stt.sample_rate_hz == 22050
+    assert config.audio.watchdog_timeout_seconds == 5
     assert config.secrets.values["OPENAI_API_KEY"] == "test-key"
 
 

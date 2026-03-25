@@ -8,6 +8,7 @@ from threading import Lock
 from time import sleep
 from typing import Callable
 
+from bob.audio.watchdog import AudioWatchdog
 
 class AudioCaptureError(RuntimeError):
     """Raised when audio capture cannot be started or recovered."""
@@ -51,12 +52,14 @@ class AudioCaptureService:
         self,
         config: AudioCaptureConfig | None = None,
         stream_factory: Callable[..., object] | None = None,
+        watchdog: AudioWatchdog | None = None,
     ) -> None:
         self.config = config or AudioCaptureConfig()
         self._stream_factory = stream_factory or self._default_stream_factory
         self._frame_queue: Queue[bytes] = Queue(maxsize=self.config.max_queue_size)
         self._stream: object | None = None
         self._lock = Lock()
+        self._watchdog = watchdog
 
     @staticmethod
     def _default_stream_factory(**kwargs: object) -> object:
@@ -78,6 +81,8 @@ class AudioCaptureService:
     ) -> None:
         # Callback must stay non-blocking; drop oldest frame if queue is full.
         frame_bytes = bytes(indata)
+        if self._watchdog is not None:
+            self._watchdog.record_frame()
         try:
             self._frame_queue.put_nowait(frame_bytes)
         except Full:

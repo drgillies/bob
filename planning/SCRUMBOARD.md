@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-016: M3 logging, health metrics, and watchdog
-- [ ] Status: Backlog
-- Size: M
-- Objective: Add rotating logs, health metrics, and no-audio watchdog reset.
-- Business Value: Supports long-run debugging and uptime.
-- Inputs/Context: `docs/deep-research-report.md` (M3-02, M3-03).
-- Target Files/Paths: `src/observability/`, `src/audio/`, `src/orchestrator/`, `config/settings.example.json`, `tests/`.
-- Implementation Notes: Emit state transitions, timings, and periodic psutil summary.
-- Constraints/Standards: Structured actionable logs; avoid duplicate exception spam.
-- Tests Required: Unit tests for logger config/watchdog triggers.
-- Done Criteria: Rotating logs + health summaries + stream reset behavior verified.
-- Deliverable Format: Code + test evidence + sample logs.
-
 ### TASK-017: M3 long-session stability harness and baseline benchmark
 - [ ] Status: Backlog
 - Size: M
@@ -315,6 +302,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 82 passed, 1 skipped; `_testing.py config-summary --config config/settings.example.json` printed a safe validated summary; `_testing.py open-app-real --app calculator --config config/settings.example.json` still launched Calculator via the centralized config path.
 - Ticket Record: `planning/tickets/TASK-015.md`
 
+### TASK-016: M3 logging, health metrics, and watchdog
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-25
+- Outcome: Added rotating log setup, runtime health snapshots, and an audio watchdog that can detect stalled input and trigger recovery.
+- Verification: `python -m pytest -q` -> 87 passed, 1 skipped; `_testing.py watchdog-fake` printed `watchdog triggered: True`, `recover calls: 1`, and a health summary line.
+- Ticket Record: `planning/tickets/TASK-016.md`
+
 ---
 
 ## Usage Notes
@@ -322,4 +317,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-015`: `TASK-016`.
+- Recommended next ticket after `TASK-016`: `TASK-017`.

@@ -18,7 +18,8 @@
   "audio": {
     "input_device": "default",
     "output_device": "default",
-    "sample_rate_hz": 16000
+    "sample_rate_hz": 16000,
+    "watchdog_timeout_seconds": 5
   },
   "actions": {
     "open_app": {
@@ -40,5 +41,12 @@
     "engine": "pyttsx3",
     "speech_rate": 150,
     "voice_id": null
+  },
+  "observability": {
+    "logs_directory": "logs",
+    "log_filename": "bob.log",
+    "log_max_bytes": 1048576,
+    "log_backup_count": 3,
+    "health_summary_interval_seconds": 300
   }
 }

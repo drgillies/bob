@@ -46,6 +46,7 @@ See:
 - [service-mode.md](docs/service-mode.md)
 - [persona-style.md](docs/persona-style.md)
 - [tts-engine-decision.md](docs/tts-engine-decision.md)
+- [risk-register.md](docs/risk-register.md)
 
 Recommended launcher script:
 - [start-bob.ps1](scripts/start-bob.ps1)

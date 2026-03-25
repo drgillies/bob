@@ -65,6 +65,13 @@ Validation goals:
 - `observability.log_max_bytes`
 - `observability.log_backup_count`
 - `observability.health_summary_interval_seconds`
+- `privacy.allow_debug_audio_capture`
+
+## Privacy Default
+
+- `privacy.allow_debug_audio_capture` should remain `false` by default
+- raw debug audio should only be written when there is explicit operator opt-in
+- manual helper commands that save microphone audio should refuse to write unless explicitly enabled
 
 ## Suggested Secret Keys
 

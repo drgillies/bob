@@ -63,6 +63,9 @@ def base_payload() -> dict:
             "log_backup_count": 3,
             "health_summary_interval_seconds": 300,
         },
+        "privacy": {
+            "allow_debug_audio_capture": False,
+        },
     }
 
 
@@ -95,6 +98,7 @@ def test_load_app_config_merges_example_and_local_override(tmp_path: Path) -> No
     }
     assert config.stt.sample_rate_hz == 22050
     assert config.audio.watchdog_timeout_seconds == 5
+    assert config.privacy.allow_debug_audio_capture is False
     assert config.secrets.values["OPENAI_API_KEY"] == "test-key"
 
 

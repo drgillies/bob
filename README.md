@@ -4,9 +4,9 @@ Lightweight local voice assistant project focused on older hardware.
 
 ## Current Status
 
-- Repository is in planning/bootstrap phase.
-- Primary implementation targets live under `src/` when development begins.
-- `TASK-001`, `TASK-002`, and `TASK-003` are complete.
+- Core MVP runtime slices through reliability work are implemented under `src/`.
+- Current deployment recommendation is Windows user-session startup via Task Scheduler.
+- Current packaging recommendation is source-run with `uv`.
 
 ## Repository Layout
 
@@ -31,6 +31,25 @@ Lightweight local voice assistant project focused on older hardware.
    - `uv run --with-requirements requirements.txt -- python -m bob`
 5. List available audio devices with `uv`:
    - `uv run --with-requirements requirements.txt -- python -m bob --list-audio-devices`
+
+## Startup Recommendation
+
+For MVP, run Bob from source and start it in the logged-in user session with Windows Task Scheduler.
+
+Why:
+- simpler operational model for audio devices
+- easier debugging than a true Windows service
+- matches the current repository maturity
+
+See:
+- [setup-target-machine.md](docs/setup-target-machine.md)
+- [service-mode.md](docs/service-mode.md)
+
+Recommended launcher script:
+- [start-bob.ps1](scripts/start-bob.ps1)
+
+Current limitation:
+- the startup path is documented and usable, but `python -m bob` still runs a bootstrap CLI and exits rather than staying alive as an always-on assistant
 
 ## Workflow Baseline
 

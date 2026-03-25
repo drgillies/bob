@@ -75,7 +75,18 @@ No tasks currently in backlog.
 
 ## To Do
 
-No tasks currently in To Do.
+### TASK-027: Source or train hey_bob.onnx for openWakeWord
+- [ ] Status: To Do
+- Size: L
+- Objective: Produce or validate a compatible custom `hey_bob.onnx` artifact for the local-first `openWakeWord` path.
+- Business Value: Resolves the remaining blocker to real spoken `Hey Bob` wake-word validation.
+- Inputs/Context: `TASK-024`, `TASK-025`, `TASK-026`, `docs/openwakeword-custom-model.md`.
+- Target Files/Paths: model artifact path, supporting docs, and `planning/tickets/TASK-027.md`.
+- Implementation Notes: Stay local-first, avoid vendor-key paths, and document licensing/training constraints honestly.
+- Constraints/Standards: No API-key wake engine in the default path.
+- Tests Required: Real spoken validation if a compatible model artifact is produced.
+- Done Criteria: Model artifact outcome is proven, or the blocker is narrowed further with concrete evidence.
+- Deliverable Format: Artifact/training outcome plus validation evidence.
 
 ---
 
@@ -86,19 +97,7 @@ No tasks currently in progress.
 ---
 
 ## In Review
-
-### TASK-026: Custom openWakeWord Hey Bob model and integration path
-- [ ] Status: In Review
-- Size: L
-- Objective: Define and implement the practical custom-model path for real spoken `Hey Bob` support on `openWakeWord`.
-- Business Value: Moves the project from a documented wake-word blocker to an actionable local-first implementation path.
-- Inputs/Context: `TASK-024`, `TASK-025`, `docs/benchmark-baseline.md`, `docs/risk-register.md`.
-- Target Files/Paths: `src/bob/wakeword/`, config/docs, and `planning/tickets/TASK-026.md`.
-- Implementation Notes: Keep the adapter boundary, avoid vendor-key paths, and document model sourcing/training requirements honestly.
-- Constraints/Standards: No API-key wake engine in the default path.
-- Tests Required: Adapter/config tests plus real spoken validation if a usable custom model becomes available.
-- Done Criteria: Custom-model path is clearly implemented or blocked with concrete next action.
-- Deliverable Format: Model-path implementation/update plus validation steps.
+No tasks currently in review.
 
 ---
 
@@ -303,6 +302,14 @@ No tasks currently in progress.
 - Outcome: Evaluated the post-validation wake-word options and chose the local-first path: keep `Hey Bob`, keep `openWakeWord`, reject vendor-key wake engines, and make custom-model work the next implementation step.
 - Verification: Documentation review plus `TASK-024` validation output confirmed `hey_bob` is not a built-in `openWakeWord` model; recommendation and risk updates were recorded in `docs/benchmark-baseline.md` and `docs/risk-register.md`.
 - Ticket Record: `planning/tickets/TASK-025.md`
+
+### TASK-026: Custom openWakeWord Hey Bob model and integration path
+- [x] Status: Done
+- Size: L
+- Completed: 2026-03-25
+- Outcome: Added the repo-side custom-model integration path for `openWakeWord`, including validated wakeword config, explicit custom model loading, and documented local model expectations.
+- Verification: `python -m pytest -q` -> `100 passed, 1 skipped`; manual `_testing.py wake-openwakeword-live --seconds 1` loaded the configured custom model path and failed fast because `models/wakeword/openwakeword/hey_bob.onnx` does not exist yet.
+- Ticket Record: `planning/tickets/TASK-026.md`
 
 ---
 

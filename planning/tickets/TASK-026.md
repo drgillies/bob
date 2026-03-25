@@ -6,7 +6,7 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 ## Ticket Metadata
 - [x] Ticket ID: `TASK-026`
 - [x] Title: `Custom openWakeWord Hey Bob model and integration path`
-- [x] Status: `In Review`
+- [x] Status: `Done`
 - [x] Size: `L`
 - [x] Priority: `High`
 - [x] Requested By: `User`
@@ -79,4 +79,4 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [x] Latest Update: `2026-03-25`
 - [x] Blockers: A compatible custom `hey_bob` model file is still missing at the configured local path `models/wakeword/openwakeword/hey_bob.onnx`.
 - [x] Completed: Added validated wake-word config support, custom local model-path loading for `openWakeWord`, adapter keyword inspection, a documented local model contract, and a manual validation path that fails honestly when the model artifact is absent.
-- [ ] Merge Commit (if merged):
+- [x] Merge Commit (if merged): `00c84ad`

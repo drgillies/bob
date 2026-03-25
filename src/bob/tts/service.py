@@ -16,6 +16,9 @@ class TTSConfig:
 
     speech_rate: int = 150
     voice_id: str | None = None
+    preferred_gender: str | None = None
+    volume: float = 1.0
+    sentence_pause_ms: int = 0
 
 
 class SpeechSynthesizer(Protocol):

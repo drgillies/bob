@@ -79,6 +79,9 @@ class TtsConfig:
     engine: str
     speech_rate: int
     voice_id: str | None = None
+    preferred_gender: str | None = None
+    volume: float = 1.0
+    sentence_pause_ms: int = 0
 
 
 @dataclass(frozen=True)
@@ -300,6 +303,13 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
             engine=_require_str(tts, "engine"),
             speech_rate=_require_positive_int(tts, "speech_rate"),
             voice_id=_optional_str(tts, "voice_id"),
+            preferred_gender=_optional_choice(
+                tts,
+                "preferred_gender",
+                allowed=("male", "female"),
+            ),
+            volume=_optional_float_in_range(tts, "volume", default=1.0, minimum=0.0, maximum=1.0),
+            sentence_pause_ms=_optional_non_negative_int(tts, "sentence_pause_ms", default=0),
         ),
         observability=ObservabilityConfig(
             logs_directory=_require_str(observability, "logs_directory"),
@@ -356,6 +366,27 @@ def _optional_str(mapping: Mapping[str, Any], key: str) -> str | None:
     return stripped or None
 
 
+def _optional_choice(
+    mapping: Mapping[str, Any],
+    key: str,
+    *,
+    allowed: tuple[str, ...],
+) -> str | None:
+    value = mapping.get(key)
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        raise ConfigError(f"Expected string or null for '{key}'.")
+    normalized = value.strip().lower()
+    if not normalized:
+        return None
+    if normalized not in allowed:
+        raise ConfigError(
+            f"Value for '{key}' must be one of: {', '.join(allowed)}."
+        )
+    return normalized
+
+
 def _require_bool(mapping: Mapping[str, Any], key: str) -> bool:
     value = mapping.get(key)
     if not isinstance(value, bool):
@@ -382,3 +413,27 @@ def _optional_positive_int(mapping: Mapping[str, Any], key: str, *, default: int
     if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
         raise ConfigError(f"Missing or invalid positive integer for '{key}'.")
     return value
+
+
+def _optional_non_negative_int(mapping: Mapping[str, Any], key: str, *, default: int) -> int:
+    value = mapping.get(key, default)
+    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        raise ConfigError(f"Missing or invalid non-negative integer for '{key}'.")
+    return value
+
+
+def _optional_float_in_range(
+    mapping: Mapping[str, Any],
+    key: str,
+    *,
+    default: float,
+    minimum: float,
+    maximum: float,
+) -> float:
+    value = mapping.get(key, default)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ConfigError(f"Missing or invalid numeric value for '{key}'.")
+    float_value = float(value)
+    if float_value < minimum or float_value > maximum:
+        raise ConfigError(f"Value for '{key}' must be between {minimum} and {maximum}.")
+    return float_value

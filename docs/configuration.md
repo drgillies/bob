@@ -66,6 +66,9 @@ Validation goals:
 - `observability.log_backup_count`
 - `observability.health_summary_interval_seconds`
 - `privacy.allow_debug_audio_capture`
+- `tts.volume`
+- `tts.sentence_pause_ms`
+- `tts.preferred_gender`
 
 ## Privacy Default
 

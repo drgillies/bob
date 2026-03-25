@@ -40,7 +40,10 @@
   "tts": {
     "engine": "pyttsx3",
     "speech_rate": 150,
-    "voice_id": null
+    "voice_id": null,
+    "preferred_gender": "male",
+    "volume": 0.9,
+    "sentence_pause_ms": 150
   },
   "observability": {
     "logs_directory": "logs",

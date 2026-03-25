@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-020: M4 voice tuning and response style guide
-- [ ] Status: Backlog
-- Size: M
-- Objective: Add voice tuning config and define consistent response-style rules.
-- Business Value: Delivers intended persona while staying legally safe.
-- Inputs/Context: `docs/deep-research-report.md` (M4-01, M4-03, M4-05), `docs/basic-scope.md`.
-- Target Files/Paths: `config/settings.example.json`, `docs/persona-style.md`, `src/tts/`.
-- Implementation Notes: Short/friendly phrasing, slower delivery; no character voice cloning.
-- Constraints/Standards: Compliance note required.
-- Tests Required: Manual QA checklist for style consistency.
-- Done Criteria: Style guide published and config controls wired.
-- Deliverable Format: Doc + config + implementation notes.
-
 ### TASK-021: M4 TTS engine decision and optional upgrade path
 - [ ] Status: Backlog
 - Size: S
@@ -295,6 +282,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 91 passed, 1 skipped; `_testing.py audio-capture-wav --seconds 0 --output debug_capture.wav` refused to write by default; explicit opt-in with `--allow-debug-audio` allowed the write path, and a real 10-second opt-in run captured 125 frames and wrote `debug_capture.wav`.
 - Ticket Record: `planning/tickets/TASK-019.md`
 
+### TASK-020: M4 voice tuning and response style guide
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-25
+- Outcome: Added configurable TTS style controls, documented Bob's spoken persona rules, and introduced best-effort male voice preference with safe fallback behavior.
+- Verification: `python -m pytest -q` -> `95 passed, 1 skipped`; `_testing.py tts-style --mode fake` printed the tuned rate/volume/pause output; `_testing.py tts-voices` showed the current machine only exposes female SAPI voices, so male selection remains best-effort until a male voice or alternate engine is added.
+- Ticket Record: `planning/tickets/TASK-020.md`
+
 ---
 
 ## Usage Notes
@@ -302,4 +297,5 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-019`: `TASK-020`.
+- Recommended next ticket after `TASK-020`: `TASK-021`.
+

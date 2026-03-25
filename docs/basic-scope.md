@@ -149,6 +149,7 @@ Completed:
 4. `docs/benchmark-baseline.md` with wake-word and STT spike findings plus benchmark procedures.
 5. `docs/error-handling-policy.md` defining retry/recover/fail behavior by component and session-memory privacy rules.
 6. `docs/service-mode.md` documenting the MVP startup and packaging strategy.
+7. `docs/persona-style.md` documenting response tone and voice tuning guidance.
 
 Next:
 1. Extend `docs/benchmark-baseline.md` with target-machine CPU/memory/latency measurements.

@@ -55,6 +55,9 @@ def base_payload() -> dict:
             "engine": "pyttsx3",
             "speech_rate": 150,
             "voice_id": None,
+            "preferred_gender": "male",
+            "volume": 0.9,
+            "sentence_pause_ms": 150,
         },
         "observability": {
             "logs_directory": "logs",
@@ -99,6 +102,9 @@ def test_load_app_config_merges_example_and_local_override(tmp_path: Path) -> No
     assert config.stt.sample_rate_hz == 22050
     assert config.audio.watchdog_timeout_seconds == 5
     assert config.privacy.allow_debug_audio_capture is False
+    assert config.tts.preferred_gender == "male"
+    assert config.tts.volume == 0.9
+    assert config.tts.sentence_pause_ms == 150
     assert config.secrets.values["OPENAI_API_KEY"] == "test-key"
 
 
@@ -200,3 +206,21 @@ def test_load_stt_settings_returns_validated_mapping(tmp_path: Path) -> None:
 
     assert settings["engine"] == "vosk"
     assert settings["model_path"] == "models/vosk/model"
+
+
+def test_load_app_config_rejects_invalid_tts_gender(tmp_path: Path) -> None:
+    example_path = tmp_path / "settings.example.json"
+    payload = base_payload()
+    payload["tts"]["preferred_gender"] = "robot"
+    write_json(example_path, payload)
+
+    try:
+        load_app_config(
+            example_path=example_path,
+            local_path=tmp_path / "missing.local.json",
+            env_path=tmp_path / ".env",
+            environ={},
+        )
+        assert False, "Expected ConfigError"
+    except ConfigError as exc:
+        assert "preferred_gender" in str(exc)

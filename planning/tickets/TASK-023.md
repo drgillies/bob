@@ -71,4 +71,5 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [x] Latest Update: `2026-03-25`
 - [ ] Blockers:
 - [x] Completed:
-- [ ] Merge Commit (if merged):
+- [x] Merge Commit (if merged): `abd3256`
+

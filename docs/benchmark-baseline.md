@@ -164,6 +164,19 @@ Observation protocol for later target-machine validation:
 - record false activations while Bob is idle
 - note the wake engine, threshold, room conditions, and whether any spoken near-matches caused activation
 
+Observed Windows validation result on 2026-03-25:
+- official model assets were downloaded successfully
+- ONNX initialization worked after the assets were present
+- available built-in keywords were:
+  - `alexa`
+  - `hey_jarvis`
+  - `hey_mycroft`
+  - `hey_rhasspy`
+  - `timer`
+  - `weather`
+- `hey_bob` is not an included built-in keyword model
+- conclusion: real spoken validation for `Hey Bob` is currently blocked until Bob either has a custom wake-word model or changes wake engine
+
 ---
 
 ## STT Spike

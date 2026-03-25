@@ -75,12 +75,22 @@ No tasks currently in backlog.
 
 ## To Do
 
-No tasks currently in To Do.
+### TASK-025: Wake-word custom model or engine change evaluation
+- [ ] Status: To Do
+- Size: M
+- Objective: Decide whether to pursue a custom `Hey Bob` model for `openWakeWord` or change wake engine / wake phrase based on the `TASK-024` blocker result.
+- Business Value: Resolves the main blocker to real spoken wake-word support.
+- Inputs/Context: `TASK-024`, `docs/benchmark-baseline.md`, `docs/risk-register.md`.
+- Target Files/Paths: `docs/benchmark-baseline.md`, `docs/risk-register.md`, `planning/tickets/TASK-025.md`.
+- Implementation Notes: Compare custom-model cost, engine-switch cost, licensing impact, and likely wake quality.
+- Constraints/Standards: Recommendation must stay evidence-based.
+- Tests Required: Documentation review and any supporting spike outputs.
+- Done Criteria: One concrete forward path is chosen and documented.
+- Deliverable Format: Recommendation doc + next-step definition.
 
 ---
 
 ## In Progress
-
 No active tasks.
 
 ---
@@ -277,6 +287,14 @@ No tasks currently in review.
 - Verification: Documentation review confirmed the chosen stack risks, mitigations, owners, and next actions are recorded in `docs/risk-register.md`, and `README.md` now references the register directly.
 - Ticket Record: `planning/tickets/TASK-023.md`
 
+### TASK-024: Real spoken wake-word validation for Hey Bob
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-25
+- Outcome: Performed real spoken wake-word validation work for `Hey Bob` and confirmed the current `openWakeWord` path is blocked by model availability, not by generic engine setup alone.
+- Verification: Live validation confirmed official `openWakeWord` assets can be downloaded and ONNX initialization works on Windows, but the built-in model list does not include `hey_bob`; current machine result is that real spoken validation for `Hey Bob` remains blocked until a custom model is provided or the wake engine changes.
+- Ticket Record: `planning/tickets/TASK-024.md`
+
 ---
 
 ## Usage Notes
@@ -284,4 +302,6 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-023`: none. Milestone 4 planning complete.
+- Recommended next ticket after `TASK-024`: `TASK-025`.
+
+

@@ -68,20 +68,6 @@ Notes:
 ---
 
 ## Backlog
-
-### TASK-021: M4 TTS engine decision and optional upgrade path
-- [ ] Status: Backlog
-- Size: S
-- Objective: Decide pyttsx3-only vs optional Piper path with licensing implications documented.
-- Business Value: Balances voice quality, CPU, and distribution risk.
-- Inputs/Context: `docs/deep-research-report.md` (M4-02).
-- Target Files/Paths: `docs/persona-style.md`, `README.md`, `docs/setup-target-machine.md`.
-- Implementation Notes: Capture GPL implications and support matrix by deployment mode.
-- Constraints/Standards: Explicit legal/distribution caveats must be documented.
-- Tests Required: Install/run sanity for chosen default engine.
-- Done Criteria: TTS strategy decision recorded and docs aligned.
-- Deliverable Format: Decision note + doc updates.
-
 ### TASK-022: M4 wake phrase finalization and compliance notes
 - [ ] Status: Backlog
 - Size: S
@@ -290,6 +276,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> `95 passed, 1 skipped`; `_testing.py tts-style --mode fake` printed the tuned rate/volume/pause output; `_testing.py tts-voices` showed the current machine only exposes female SAPI voices, so male selection remains best-effort until a male voice or alternate engine is added.
 - Ticket Record: `planning/tickets/TASK-020.md`
 
+### TASK-021: M4 TTS engine decision and optional upgrade path
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-25
+- Outcome: Recorded `pyttsx3` as the supported MVP default and documented Piper as a later optional upgrade path with explicit GPL and packaging caveats.
+- Verification: `_testing.py tts-voices` reported two visible SAPI voices on the current machine, both female (`Microsoft Hazel Desktop` and `Microsoft Zira Desktop`), confirming that `pyttsx3` works while also confirming the current local voice limitation.
+- Ticket Record: `planning/tickets/TASK-021.md`
+
 ---
 
 ## Usage Notes
@@ -297,5 +291,6 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-020`: `TASK-021`.
+- Recommended next ticket after `TASK-021`: `TASK-022`.
+
 

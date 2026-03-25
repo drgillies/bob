@@ -48,5 +48,8 @@
     "log_max_bytes": 1048576,
     "log_backup_count": 3,
     "health_summary_interval_seconds": 300
+  },
+  "privacy": {
+    "allow_debug_audio_capture": false
   }
 }

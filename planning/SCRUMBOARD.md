@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-019: M3 privacy mode hardening
-- [ ] Status: Backlog
-- Size: S
-- Objective: Enforce no raw audio storage by default with explicit debug opt-in.
-- Business Value: Protects user privacy and reduces risk.
-- Inputs/Context: `docs/deep-research-report.md` (M3-07), `docs/basic-scope.md`.
-- Target Files/Paths: `src/config/`, `src/audio/`, `docs/configuration.md`, `tests/`.
-- Implementation Notes: Add clear warning logs when debug audio capture is enabled.
-- Constraints/Standards: Default secure behavior.
-- Tests Required: Tests for default-off and explicit-on behavior.
-- Done Criteria: Privacy behavior implemented and documented.
-- Deliverable Format: Code + tests + doc updates.
-
 ### TASK-020: M4 voice tuning and response style guide
 - [ ] Status: Backlog
 - Size: M
@@ -300,6 +287,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 89 passed, 1 skipped; `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start-bob.ps1` launched the current startup path and then exited after bootstrap as expected; Task Scheduler dry-run commands are documented for execution on the target machine with sufficient permissions.
 - Ticket Record: `planning/tickets/TASK-018.md`
 
+### TASK-019: M3 privacy mode hardening
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-25
+- Outcome: Added explicit privacy gating for raw debug audio capture so disk writes are disabled by default and only allowed through deliberate opt-in.
+- Verification: `python -m pytest -q` -> 91 passed, 1 skipped; `_testing.py audio-capture-wav --seconds 0 --output debug_capture.wav` refused to write by default; explicit opt-in with `--allow-debug-audio` allowed the write path, and a real 10-second opt-in run captured 125 frames and wrote `debug_capture.wav`.
+- Ticket Record: `planning/tickets/TASK-019.md`
+
 ---
 
 ## Usage Notes
@@ -307,4 +302,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-018`: `TASK-019`.
+- Recommended next ticket after `TASK-019`: `TASK-020`.

@@ -91,6 +91,11 @@ class ObservabilityConfig:
 
 
 @dataclass(frozen=True)
+class PrivacyConfig:
+    allow_debug_audio_capture: bool = False
+
+
+@dataclass(frozen=True)
 class SecretConfig:
     values: dict[str, str] = field(default_factory=dict)
 
@@ -105,6 +110,7 @@ class AppConfig:
     stt: SttConfig
     tts: TtsConfig
     observability: ObservabilityConfig
+    privacy: PrivacyConfig
     secrets: SecretConfig
 
 
@@ -241,6 +247,7 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
     stt = _require_mapping(payload, "stt")
     tts = _require_mapping(payload, "tts")
     observability = _require_mapping(payload, "observability")
+    privacy = _optional_mapping(payload, "privacy")
 
     aliases_value = _require_mapping(open_app, "aliases")
     aliases: dict[str, str] = {}
@@ -304,6 +311,13 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
                 "health_summary_interval_seconds",
             ),
         ),
+        privacy=PrivacyConfig(
+            allow_debug_audio_capture=_optional_bool(
+                privacy,
+                "allow_debug_audio_capture",
+                default=False,
+            )
+        ),
         secrets=SecretConfig(values=dict(secrets)),
     )
     return config
@@ -311,6 +325,15 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
 
 def _require_mapping(mapping: Mapping[str, Any], key: str) -> Mapping[str, Any]:
     value = mapping.get(key)
+    if not isinstance(value, Mapping):
+        raise ConfigError(f"Missing or invalid object for '{key}'.")
+    return value
+
+
+def _optional_mapping(mapping: Mapping[str, Any], key: str) -> Mapping[str, Any]:
+    value = mapping.get(key)
+    if value is None:
+        return {}
     if not isinstance(value, Mapping):
         raise ConfigError(f"Missing or invalid object for '{key}'.")
     return value
@@ -335,6 +358,13 @@ def _optional_str(mapping: Mapping[str, Any], key: str) -> str | None:
 
 def _require_bool(mapping: Mapping[str, Any], key: str) -> bool:
     value = mapping.get(key)
+    if not isinstance(value, bool):
+        raise ConfigError(f"Missing or invalid boolean for '{key}'.")
+    return value
+
+
+def _optional_bool(mapping: Mapping[str, Any], key: str, *, default: bool) -> bool:
+    value = mapping.get(key, default)
     if not isinstance(value, bool):
         raise ConfigError(f"Missing or invalid boolean for '{key}'.")
     return value

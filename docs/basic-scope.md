@@ -120,12 +120,11 @@ Bob's speaking style target:
 
 ## 12. Open Decisions
 
-1. Final wake phrase.
-2. Offline model stack (wake word/STT/TTS libraries).
-3. Whether Bob should support internet fallback for harder queries.
-4. Service mode: auto-start on boot or manual run.
-5. Minimum acceptable hardware profile after first benchmark pass.
-6. Telemetry depth for non-sensitive local health metrics.
+1. Offline model stack (wake word/STT/TTS libraries).
+2. Whether Bob should support internet fallback for harder queries.
+3. Service mode: auto-start on boot or manual run.
+4. Minimum acceptable hardware profile after first benchmark pass.
+5. Telemetry depth for non-sensitive local health metrics.
 
 ## 13. Configuration and Secrets Baseline
 

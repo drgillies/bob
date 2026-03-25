@@ -68,18 +68,6 @@ Notes:
 ---
 
 ## Backlog
-### TASK-022: M4 wake phrase finalization and compliance notes
-- [ ] Status: Backlog
-- Size: S
-- Objective: Finalize wake phrase and operational notes for chosen wake engine.
-- Business Value: Locks user-facing activation behavior for MVP release.
-- Inputs/Context: `docs/deep-research-report.md` (M4-04), benchmark results from wake-word tasks.
-- Target Files/Paths: `docs/mvp-command-list.md`, `docs/persona-style.md`, `config/settings.example.json`.
-- Implementation Notes: Include false-trigger rationale and fallback operational caveats.
-- Constraints/Standards: Offline-first expectations and licensing constraints documented.
-- Tests Required: 1-hour false-trigger observation protocol run and recorded.
-- Done Criteria: Wake phrase + rationale + caveats documented.
-- Deliverable Format: Updated docs + test observation summary.
 
 ### TASK-023: Cross-cutting licensing and risk register
 - [ ] Status: Backlog
@@ -108,13 +96,7 @@ No active tasks.
 
 ---
 
-## In Review
-
-No tasks currently in review.
-
----
-
-## Done
+## In Review`r`n`r`nNo tasks currently in review.`r`n`r`n---`r`n`r`n## Done
 
 ### TASK-001: Convert deep research into execution baseline docs
 - [x] Status: Done
@@ -276,14 +258,13 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> `95 passed, 1 skipped`; `_testing.py tts-style --mode fake` printed the tuned rate/volume/pause output; `_testing.py tts-voices` showed the current machine only exposes female SAPI voices, so male selection remains best-effort until a male voice or alternate engine is added.
 - Ticket Record: `planning/tickets/TASK-020.md`
 
-### TASK-021: M4 TTS engine decision and optional upgrade path
+### TASK-022: M4 wake phrase finalization and compliance notes
 - [x] Status: Done
 - Size: S
 - Completed: 2026-03-25
-- Outcome: Recorded `pyttsx3` as the supported MVP default and documented Piper as a later optional upgrade path with explicit GPL and packaging caveats.
-- Verification: `_testing.py tts-voices` reported two visible SAPI voices on the current machine, both female (`Microsoft Hazel Desktop` and `Microsoft Zira Desktop`), confirming that `pyttsx3` works while also confirming the current local voice limitation.
-- Ticket Record: `planning/tickets/TASK-021.md`
-
+- Outcome: Finalized `Hey Bob` as the MVP wake phrase and documented the operational caveats around engine support, false-trigger review, and possible custom-model requirements.
+- Verification: Documentation review confirmed `Hey Bob` is consistent across shared config and wake-phrase docs, and `docs/benchmark-baseline.md` now records the custom-model and false-trigger observation caveats explicitly.
+- Ticket Record: `planning/tickets/TASK-022.md`
 ---
 
 ## Usage Notes
@@ -291,6 +272,8 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-021`: `TASK-022`.
+- Recommended next ticket after `TASK-022`: `TASK-023`.
+
+
 
 

@@ -144,6 +144,26 @@ Suggested config fields:
 - `wakeword.threshold`
 - `wakeword.access_key_env_var`
 
+## Wake Phrase Finalization
+
+Final MVP wake phrase:
+- `Hey Bob`
+
+Rationale:
+- already aligned with the assistant name and current config/docs
+- short and natural for repeated use
+- acceptable as the user-facing phrase unless benchmark evidence shows an unacceptable false-trigger pattern
+
+Operational caveats:
+- `Hey Bob` is finalized as the product phrase, but wake-engine support remains implementation-dependent.
+- For `openWakeWord`, Bob should not assume a turnkey built-in `Hey Bob` model exists; a custom model plan may still be required.
+- If a later benchmark run shows unacceptable false accepts or false rejects for `Hey Bob`, revisit the phrase and document the measured reason.
+
+Observation protocol for later target-machine validation:
+- run a 1-hour normal-room listening session
+- record false activations while Bob is idle
+- note the wake engine, threshold, room conditions, and whether any spoken near-matches caused activation
+
 ---
 
 ## STT Spike

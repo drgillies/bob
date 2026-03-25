@@ -21,6 +21,13 @@
     "sample_rate_hz": 16000,
     "watchdog_timeout_seconds": 5
   },
+  "wakeword": {
+    "engine": "openwakeword",
+    "keyword": "hey_bob",
+    "threshold": 0.5,
+    "model_path": "models/wakeword/openwakeword/hey_bob.onnx",
+    "inference_framework": "onnx"
+  },
   "actions": {
     "open_app": {
       "enabled": true,

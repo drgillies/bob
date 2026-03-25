@@ -204,6 +204,21 @@ Decision note:
 - This recommendation prioritizes architectural consistency and the explicit no-API constraint over the fastest possible unblocker.
 - Inference from the current sources and local validation: the next correct step is custom-model work on `openWakeWord`, not an engine switch that introduces a vendor key.
 
+## TASK-026 Integration Note
+
+Current repository support now includes:
+- explicit wake-word config fields for `engine`, `keyword`, `threshold`, `model_path`, and `inference_framework`
+- `openWakeWord` adapter support for loading a custom model file directly
+- fail-fast validation when the configured custom model file is missing
+
+Observed integration result on 2026-03-25:
+- the live validation helper now reads the expected local model path from config
+- current configured path is `models/wakeword/openwakeword/hey_bob.onnx`
+- current blocker is no longer adapter support; it is the absence of the actual custom model artifact at that path
+
+See:
+- `docs/openwakeword-custom-model.md`
+
 ---
 
 ## STT Spike

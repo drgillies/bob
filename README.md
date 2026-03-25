@@ -46,6 +46,7 @@ See:
 - [service-mode.md](docs/service-mode.md)
 - [persona-style.md](docs/persona-style.md)
 - [tts-engine-decision.md](docs/tts-engine-decision.md)
+- [openwakeword-custom-model.md](docs/openwakeword-custom-model.md)
 - [risk-register.md](docs/risk-register.md)
 
 Recommended launcher script:

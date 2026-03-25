@@ -6,7 +6,7 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 ## Ticket Metadata
 - [x] Ticket ID: `TASK-026`
 - [x] Title: `Custom openWakeWord Hey Bob model and integration path`
-- [x] Status: `To Do`
+- [x] Status: `In Review`
 - [x] Size: `L`
 - [x] Priority: `High`
 - [x] Requested By: `User`
@@ -56,9 +56,9 @@ The agent creates the initial ticket body, then you add final acceptance criteri
   - documentation review for model setup and licensing notes
 
 ## Manual Tests
-- [ ] Command:
-- [ ] Expected Result:
-- [ ] Actual Result:
+- [x] Command: `uv run --with openwakeword --with-requirements requirements.txt -- python _testing.py wake-openwakeword-live --seconds 1`
+- [x] Expected Result: Bob should load wake-word settings from config, attempt to initialize the configured custom model path, and either start listening or fail with a concrete local model-path error.
+- [x] Actual Result: The helper loaded `models/wakeword/openwakeword/hey_bob.onnx` from config and failed fast with `Configured wake-word model does not exist`, which confirms the integration path is wired and the remaining blocker is the missing model artifact.
 
 ## Done Criteria
 - [x] Minimum completion conditions for the agent:
@@ -77,6 +77,6 @@ The agent creates the initial ticket body, then you add final acceptance criteri
 - [x] Agent: `Codex`
 - [x] Started: `2026-03-25`
 - [x] Latest Update: `2026-03-25`
-- [ ] Blockers:
-- [ ] Completed:
+- [x] Blockers: A compatible custom `hey_bob` model file is still missing at the configured local path `models/wakeword/openwakeword/hey_bob.onnx`.
+- [x] Completed: Added validated wake-word config support, custom local model-path loading for `openWakeWord`, adapter keyword inspection, a documented local model contract, and a manual validation path that fails honestly when the model artifact is absent.
 - [ ] Merge Commit (if merged):

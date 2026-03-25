@@ -75,18 +75,7 @@ No tasks currently in backlog.
 
 ## To Do
 
-### TASK-026: Custom openWakeWord Hey Bob model and integration path
-- [ ] Status: To Do
-- Size: L
-- Objective: Define and implement the practical custom-model path for real spoken `Hey Bob` support on `openWakeWord`.
-- Business Value: Moves the project from a documented wake-word blocker to an actionable local-first implementation path.
-- Inputs/Context: `TASK-024`, `TASK-025`, `docs/benchmark-baseline.md`, `docs/risk-register.md`.
-- Target Files/Paths: `src/bob/wakeword/`, config/docs, and `planning/tickets/TASK-026.md`.
-- Implementation Notes: Keep the adapter boundary, avoid vendor-key paths, and document model sourcing/training requirements honestly.
-- Constraints/Standards: No API-key wake engine in the default path.
-- Tests Required: Adapter/config tests plus real spoken validation if a usable custom model becomes available.
-- Done Criteria: Custom-model path is clearly implemented or blocked with concrete next action.
-- Deliverable Format: Model-path implementation/update plus validation steps.
+No tasks currently in To Do.
 
 ---
 
@@ -97,7 +86,19 @@ No tasks currently in progress.
 ---
 
 ## In Review
-No tasks currently in review.
+
+### TASK-026: Custom openWakeWord Hey Bob model and integration path
+- [ ] Status: In Review
+- Size: L
+- Objective: Define and implement the practical custom-model path for real spoken `Hey Bob` support on `openWakeWord`.
+- Business Value: Moves the project from a documented wake-word blocker to an actionable local-first implementation path.
+- Inputs/Context: `TASK-024`, `TASK-025`, `docs/benchmark-baseline.md`, `docs/risk-register.md`.
+- Target Files/Paths: `src/bob/wakeword/`, config/docs, and `planning/tickets/TASK-026.md`.
+- Implementation Notes: Keep the adapter boundary, avoid vendor-key paths, and document model sourcing/training requirements honestly.
+- Constraints/Standards: No API-key wake engine in the default path.
+- Tests Required: Adapter/config tests plus real spoken validation if a usable custom model becomes available.
+- Done Criteria: Custom-model path is clearly implemented or blocked with concrete next action.
+- Deliverable Format: Model-path implementation/update plus validation steps.
 
 ---
 

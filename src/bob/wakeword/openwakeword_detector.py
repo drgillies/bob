@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable
 
 from bob.wakeword.service import WakeDetectionEvent
@@ -18,6 +19,8 @@ class OpenWakeWordConfig:
 
     keyword: str
     threshold: float = 0.5
+    model_path: str | None = None
+    inference_framework: str | None = None
     model_kwargs: dict[str, Any] = field(default_factory=dict)
 
 
@@ -46,10 +49,37 @@ class OpenWakeWordDetector:
         if callable(reset_fn):
             reset_fn()
 
+    def available_keywords(self) -> list[str]:
+        class_mapping = getattr(self._model, "class_mapping", {})
+        if isinstance(class_mapping, dict) and class_mapping:
+            keywords: set[str] = set()
+            for model_name, labels in class_mapping.items():
+                keywords.add(str(model_name))
+                if isinstance(labels, dict):
+                    keywords.update(str(value) for value in labels.values())
+            return sorted(keywords)
+
+        models = getattr(self._model, "models", {})
+        if isinstance(models, dict):
+            return sorted(str(name) for name in models.keys())
+
+        return []
+
     def _build_model(self, model_factory: Callable[..., Any] | None) -> Any:
+        model_kwargs = dict(self._config.model_kwargs)
+        if self._config.model_path:
+            model_path = Path(self._config.model_path)
+            if not model_path.exists():
+                raise WakeWordError(
+                    f"Configured wake-word model does not exist: '{model_path}'"
+                )
+            model_kwargs["wakeword_models"] = [str(model_path)]
+        if self._config.inference_framework:
+            model_kwargs["inference_framework"] = self._config.inference_framework
+
         if model_factory is not None:
             try:
-                return model_factory(**self._config.model_kwargs)
+                return model_factory(**model_kwargs)
             except Exception as exc:
                 raise WakeWordError(
                     f"Failed to initialize openWakeWord model: {exc}"
@@ -63,6 +93,6 @@ class OpenWakeWordDetector:
             ) from exc
 
         try:
-            return Model(**self._config.model_kwargs)
+            return Model(**model_kwargs)
         except Exception as exc:  # pragma: no cover - depends on local setup
             raise WakeWordError(f"Failed to initialize openWakeWord model: {exc}") from exc

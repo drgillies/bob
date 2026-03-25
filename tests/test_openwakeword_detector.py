@@ -15,10 +15,18 @@ from bob.wakeword import OpenWakeWordConfig, OpenWakeWordDetector, WakeWordError
 
 
 class FakeModel:
-    def __init__(self, predictions: list[dict[str, float]]) -> None:
+    def __init__(
+        self,
+        predictions: list[dict[str, float]],
+        *,
+        class_mapping: dict[str, dict[str, str]] | None = None,
+        models: dict[str, object] | None = None,
+    ) -> None:
         self._predictions = list(predictions)
         self.frames_seen: list[bytes] = []
         self.reset_calls = 0
+        self.class_mapping = class_mapping or {}
+        self.models = models or {}
 
     def predict(self, frame: bytes) -> dict[str, float]:
         self.frames_seen.append(frame)
@@ -93,3 +101,51 @@ def test_openwakeword_detector_init_raises_when_factory_fails() -> None:
         assert False, "Expected WakeWordError"
     except WakeWordError:
         pass
+
+
+def test_openwakeword_detector_available_keywords_reads_class_mapping() -> None:
+    model = FakeModel(
+        [],
+        class_mapping={"hey_bob": {"0": "hey_bob"}},
+    )
+    detector = OpenWakeWordDetector(
+        OpenWakeWordConfig(keyword="hey_bob"),
+        model_factory=lambda **_: model,
+    )
+
+    keywords = detector.available_keywords()
+
+    assert keywords == ["hey_bob"]
+
+
+def test_openwakeword_detector_passes_custom_model_kwargs(tmp_path: Path) -> None:
+    model_path = tmp_path / "hey_bob.onnx"
+    model_path.write_bytes(b"fake-model")
+    captured: dict[str, object] = {}
+    model = FakeModel([], models={"hey_bob": object()})
+
+    def factory(**kwargs: object) -> FakeModel:
+        captured.update(kwargs)
+        return model
+
+    OpenWakeWordDetector(
+        OpenWakeWordConfig(
+            keyword="hey_bob",
+            model_path=str(model_path),
+            inference_framework="onnx",
+            model_kwargs={"vad_threshold": 0.2},
+        ),
+        model_factory=factory,
+    )
+
+    assert captured["wakeword_models"] == [str(model_path)]
+    assert captured["inference_framework"] == "onnx"
+    assert captured["vad_threshold"] == 0.2
+
+
+def test_openwakeword_detector_raises_for_missing_configured_model() -> None:
+    try:
+        OpenWakeWordDetector(OpenWakeWordConfig(keyword="hey_bob", model_path="missing.onnx"))
+        assert False, "Expected WakeWordError"
+    except WakeWordError as exc:
+        assert "does not exist" in str(exc)

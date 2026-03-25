@@ -94,6 +94,12 @@ Suggested validation command:
 - `$env:PYTHONPATH="src"; uv run --with-requirements requirements.txt -- python _testing.py tts-style --mode tts`
 - `$env:PYTHONPATH="src"; uv run --with-requirements requirements.txt -- python _testing.py tts-voices`
 
+Engine decision note:
+
+- MVP default remains `pyttsx3`
+- higher-quality local voice work is deferred to the optional Piper path documented in `docs/tts-engine-decision.md`
+- a machine without an installed male SAPI voice will fall back to the available local voices
+
 ## Compliance Note
 
 The intended style is inspired only at a high level by a relaxed, friendly delivery.

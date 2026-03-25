@@ -45,6 +45,7 @@ See:
 - [setup-target-machine.md](docs/setup-target-machine.md)
 - [service-mode.md](docs/service-mode.md)
 - [persona-style.md](docs/persona-style.md)
+- [tts-engine-decision.md](docs/tts-engine-decision.md)
 
 Recommended launcher script:
 - [start-bob.ps1](scripts/start-bob.ps1)

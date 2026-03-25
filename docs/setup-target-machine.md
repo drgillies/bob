@@ -87,3 +87,12 @@ Current expected behavior at this project stage:
 - Prefer local/offline processing where possible.
 - Keep runtime defaults conservative for low CPU usage.
 - Validate Bob manually before enabling automatic startup.
+
+## TTS Notes
+
+- MVP default TTS engine is `pyttsx3`.
+- If the machine only exposes limited built-in SAPI voices, Bob will use the best available local voice.
+- To inspect visible local voices, run:
+  - `$env:PYTHONPATH = "src"`
+  - `uv run --with-requirements requirements.txt -- python _testing.py tts-voices`
+- Piper is not part of the default setup path. See [tts-engine-decision.md](tts-engine-decision.md) before attempting a higher-quality voice upgrade.

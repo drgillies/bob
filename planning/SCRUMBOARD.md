@@ -69,18 +69,7 @@ Notes:
 
 ## Backlog
 
-### TASK-023: Cross-cutting licensing and risk register
-- [ ] Status: Backlog
-- Size: S
-- Objective: Create explicit licensing and operational risk register for selected stack.
-- Business Value: Prevents late-stage legal/distribution blockers.
-- Inputs/Context: `docs/deep-research-report.md` (licensing and risk sections).
-- Target Files/Paths: `docs/risk-register.md`, `README.md`.
-- Implementation Notes: Track openWakeWord model license, Piper GPL, Porcupine key dependency.
-- Constraints/Standards: Keep actionable mitigations and owner/next-action fields.
-- Tests Required: Documentation review checklist.
-- Done Criteria: Risk register exists and is referenced by README.
-- Deliverable Format: New doc + README reference.
+No tasks currently in backlog.
 
 ---
 
@@ -96,7 +85,13 @@ No active tasks.
 
 ---
 
-## In Review`r`n`r`nNo tasks currently in review.`r`n`r`n---`r`n`r`n## Done
+## In Review
+
+No tasks currently in review.
+
+---
+
+## Done
 
 ### TASK-001: Convert deep research into execution baseline docs
 - [x] Status: Done
@@ -258,6 +253,14 @@ No active tasks.
 - Verification: `python -m pytest -q` -> `95 passed, 1 skipped`; `_testing.py tts-style --mode fake` printed the tuned rate/volume/pause output; `_testing.py tts-voices` showed the current machine only exposes female SAPI voices, so male selection remains best-effort until a male voice or alternate engine is added.
 - Ticket Record: `planning/tickets/TASK-020.md`
 
+### TASK-021: M4 TTS engine decision and optional upgrade path
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-25
+- Outcome: Recorded `pyttsx3` as the supported MVP default and documented Piper as a later optional upgrade path with explicit GPL and packaging caveats.
+- Verification: `_testing.py tts-voices` reported two visible SAPI voices on the current machine, both female (`Microsoft Hazel Desktop` and `Microsoft Zira Desktop`), confirming that `pyttsx3` works while also confirming the current local voice limitation.
+- Ticket Record: `planning/tickets/TASK-021.md`
+
 ### TASK-022: M4 wake phrase finalization and compliance notes
 - [x] Status: Done
 - Size: S
@@ -265,6 +268,15 @@ No active tasks.
 - Outcome: Finalized `Hey Bob` as the MVP wake phrase and documented the operational caveats around engine support, false-trigger review, and possible custom-model requirements.
 - Verification: Documentation review confirmed `Hey Bob` is consistent across shared config and wake-phrase docs, and `docs/benchmark-baseline.md` now records the custom-model and false-trigger observation caveats explicitly.
 - Ticket Record: `planning/tickets/TASK-022.md`
+
+### TASK-023: Cross-cutting licensing and risk register
+- [x] Status: Done
+- Size: S
+- Completed: 2026-03-25
+- Outcome: Added an explicit licensing and operational risk register covering the selected wake-word, STT, TTS, packaging, privacy, and compliance risks.
+- Verification: Documentation review confirmed the chosen stack risks, mitigations, owners, and next actions are recorded in `docs/risk-register.md`, and `README.md` now references the register directly.
+- Ticket Record: `planning/tickets/TASK-023.md`
+
 ---
 
 ## Usage Notes
@@ -272,8 +284,4 @@ No active tasks.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-022`: `TASK-023`.
-
-
-
-
+- Recommended next ticket after `TASK-023`: none. Milestone 4 planning complete.

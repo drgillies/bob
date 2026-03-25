@@ -116,3 +116,9 @@ Style should be achieved through:
 2. phrasing
 3. sentence length
 4. safe TTS configuration
+
+## Wake Phrase Note
+
+Bob's final MVP wake phrase is `Hey Bob`.
+
+That phrase is a product choice, not a claim that every wake engine or pre-trained wake model supports it equally well. If the selected wake engine requires phrase-specific model assets, Bob should prefer operational correctness over forcing the exact phrase into an unsupported detector path.

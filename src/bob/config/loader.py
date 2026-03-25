@@ -55,6 +55,15 @@ class AudioConfig:
 
 
 @dataclass(frozen=True)
+class WakeWordConfig:
+    engine: str
+    keyword: str
+    threshold: float
+    model_path: str | None = None
+    inference_framework: str | None = None
+
+
+@dataclass(frozen=True)
 class OpenAppConfig:
     enabled: bool
     aliases: dict[str, str] = field(default_factory=dict)
@@ -109,6 +118,7 @@ class AppConfig:
     assistant: AssistantConfig
     timeouts: TimeoutConfig
     audio: AudioConfig
+    wakeword: WakeWordConfig
     actions: ActionConfig
     stt: SttConfig
     tts: TtsConfig
@@ -182,6 +192,29 @@ def load_stt_settings(
     }
 
 
+def load_wakeword_settings(
+    *,
+    example_path: Path | str | None = None,
+    local_path: Path | str | None = None,
+    env_path: Path | str | None = None,
+    environ: Mapping[str, str] | None = None,
+) -> dict[str, object]:
+    """Return validated wake-word settings in mapping form for detector setup."""
+    config = load_app_config(
+        example_path=example_path,
+        local_path=local_path,
+        env_path=env_path,
+        environ=environ,
+    )
+    return {
+        "engine": config.wakeword.engine,
+        "keyword": config.wakeword.keyword,
+        "threshold": config.wakeword.threshold,
+        "model_path": config.wakeword.model_path,
+        "inference_framework": config.wakeword.inference_framework,
+    }
+
+
 def _load_json_mapping(path: Path) -> dict[str, Any]:
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -245,6 +278,7 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
     assistant = _require_mapping(payload, "assistant")
     timeouts = _require_mapping(payload, "timeouts")
     audio = _require_mapping(payload, "audio")
+    wakeword = _require_mapping(payload, "wakeword")
     actions = _require_mapping(payload, "actions")
     open_app = _require_mapping(actions, "open_app")
     stt = _require_mapping(payload, "stt")
@@ -284,6 +318,23 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
                 audio,
                 "watchdog_timeout_seconds",
                 default=5,
+            ),
+        ),
+        wakeword=WakeWordConfig(
+            engine=_require_str(wakeword, "engine"),
+            keyword=_require_str(wakeword, "keyword"),
+            threshold=_optional_float_in_range(
+                wakeword,
+                "threshold",
+                default=0.5,
+                minimum=0.0,
+                maximum=1.0,
+            ),
+            model_path=_optional_str(wakeword, "model_path"),
+            inference_framework=_optional_choice(
+                wakeword,
+                "inference_framework",
+                allowed=("tflite", "onnx"),
             ),
         ),
         actions=ActionConfig(

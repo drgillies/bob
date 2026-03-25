@@ -13,9 +13,11 @@ from bob.config.loader import (
     SttConfig,
     TimeoutConfig,
     TtsConfig,
+    WakeWordConfig,
     load_app_config,
     load_open_app_settings,
     load_stt_settings,
+    load_wakeword_settings,
 )
 
 __all__ = [
@@ -31,7 +33,9 @@ __all__ = [
     "SttConfig",
     "TimeoutConfig",
     "TtsConfig",
+    "WakeWordConfig",
     "load_app_config",
     "load_open_app_settings",
     "load_stt_settings",
+    "load_wakeword_settings",
 ]

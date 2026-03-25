@@ -28,6 +28,7 @@
 - Existing callers that only need a slice can use:
   - `bob.config.load_open_app_settings()`
   - `bob.config.load_stt_settings()`
+  - `bob.config.load_wakeword_settings()`
 
 Validation goals:
 
@@ -60,6 +61,11 @@ Validation goals:
 - `audio.output_device`
 - `audio.sample_rate_hz`
 - `audio.watchdog_timeout_seconds`
+- `wakeword.engine`
+- `wakeword.keyword`
+- `wakeword.threshold`
+- `wakeword.model_path`
+- `wakeword.inference_framework`
 - `observability.logs_directory`
 - `observability.log_filename`
 - `observability.log_max_bytes`
@@ -69,6 +75,16 @@ Validation goals:
 - `tts.volume`
 - `tts.sentence_pause_ms`
 - `tts.preferred_gender`
+
+## Wake-Word Model Path
+
+- Bob's default local-first wake-word direction is `openWakeWord`
+- shared config now includes a `wakeword` section for custom model loading
+- expected local custom model path is `models/wakeword/openwakeword/hey_bob.onnx`
+- that model file is not assumed to exist on every machine; until it exists, real spoken validation remains blocked
+
+See:
+- `docs/openwakeword-custom-model.md`
 
 ## Privacy Default
 

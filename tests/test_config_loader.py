@@ -12,7 +12,13 @@ SRC_DIR = ROOT_DIR / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from bob.config import ConfigError, load_app_config, load_open_app_settings, load_stt_settings
+from bob.config import (
+    ConfigError,
+    load_app_config,
+    load_open_app_settings,
+    load_stt_settings,
+    load_wakeword_settings,
+)
 
 
 def write_json(path: Path, payload: dict) -> None:
@@ -38,6 +44,13 @@ def base_payload() -> dict:
             "output_device": "default",
             "sample_rate_hz": 16000,
             "watchdog_timeout_seconds": 5,
+        },
+        "wakeword": {
+            "engine": "openwakeword",
+            "keyword": "hey_bob",
+            "threshold": 0.5,
+            "model_path": "models/wakeword/openwakeword/hey_bob.onnx",
+            "inference_framework": "onnx",
         },
         "actions": {
             "open_app": {
@@ -101,6 +114,8 @@ def test_load_app_config_merges_example_and_local_override(tmp_path: Path) -> No
     }
     assert config.stt.sample_rate_hz == 22050
     assert config.audio.watchdog_timeout_seconds == 5
+    assert config.wakeword.keyword == "hey_bob"
+    assert config.wakeword.model_path == "models/wakeword/openwakeword/hey_bob.onnx"
     assert config.privacy.allow_debug_audio_capture is False
     assert config.tts.preferred_gender == "male"
     assert config.tts.volume == 0.9
@@ -206,6 +221,40 @@ def test_load_stt_settings_returns_validated_mapping(tmp_path: Path) -> None:
 
     assert settings["engine"] == "vosk"
     assert settings["model_path"] == "models/vosk/model"
+
+
+def test_load_wakeword_settings_returns_validated_mapping(tmp_path: Path) -> None:
+    example_path = tmp_path / "settings.example.json"
+    write_json(example_path, base_payload())
+
+    settings = load_wakeword_settings(
+        example_path=example_path,
+        local_path=tmp_path / "missing.local.json",
+        env_path=tmp_path / ".env",
+        environ={},
+    )
+
+    assert settings["engine"] == "openwakeword"
+    assert settings["keyword"] == "hey_bob"
+    assert settings["model_path"] == "models/wakeword/openwakeword/hey_bob.onnx"
+
+
+def test_load_app_config_rejects_invalid_wakeword_threshold(tmp_path: Path) -> None:
+    example_path = tmp_path / "settings.example.json"
+    payload = base_payload()
+    payload["wakeword"]["threshold"] = 2
+    write_json(example_path, payload)
+
+    try:
+        load_app_config(
+            example_path=example_path,
+            local_path=tmp_path / "missing.local.json",
+            env_path=tmp_path / ".env",
+            environ={},
+        )
+        assert False, "Expected ConfigError"
+    except ConfigError as exc:
+        assert "threshold" in str(exc)
 
 
 def test_load_app_config_rejects_invalid_tts_gender(tmp_path: Path) -> None:

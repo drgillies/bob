@@ -75,8 +75,20 @@ No tasks currently in backlog.
 
 ## To Do
 
+No tasks currently in To Do.
+
+---
+
+## In Progress
+
+No tasks currently in progress.
+
+---
+
+## In Review
+
 ### TASK-025: Wake-word custom model or engine change evaluation
-- [ ] Status: To Do
+- [ ] Status: In Review
 - Size: M
 - Objective: Decide whether to pursue a custom `Hey Bob` model for `openWakeWord` or change wake engine / wake phrase based on the `TASK-024` blocker result.
 - Business Value: Resolves the main blocker to real spoken wake-word support.
@@ -84,20 +96,9 @@ No tasks currently in backlog.
 - Target Files/Paths: `docs/benchmark-baseline.md`, `docs/risk-register.md`, `planning/tickets/TASK-025.md`.
 - Implementation Notes: Compare custom-model cost, engine-switch cost, licensing impact, and likely wake quality.
 - Constraints/Standards: Recommendation must stay evidence-based.
-- Tests Required: Documentation review and any supporting spike outputs.
+- Tests Required: Documentation review and supporting wake validation output from `TASK-024`.
 - Done Criteria: One concrete forward path is chosen and documented.
 - Deliverable Format: Recommendation doc + next-step definition.
-
----
-
-## In Progress
-No active tasks.
-
----
-
-## In Review
-
-No tasks currently in review.
 
 ---
 
@@ -302,6 +303,7 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-024`: `TASK-025`.
+- Recommended next ticket after `TASK-025`: create the custom `openWakeWord` `Hey Bob` model/integration ticket if this recommendation is accepted.
+
 
 

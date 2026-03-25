@@ -69,22 +69,9 @@ Notes:
 
 ## Backlog
 
-### TASK-017: M3 long-session stability harness and baseline benchmark
-- [ ] Status: Backlog
-- Size: M
-- Objective: Create repeatable 4+ hour stability harness and benchmark baseline doc.
-- Business Value: Proves MVP reliability on constrained hardware.
-- Inputs/Context: `docs/deep-research-report.md` (M3-04), `docs/basic-scope.md`.
-- Target Files/Paths: `docs/benchmark-baseline.md`, `src/` test-mode script, `tests/`.
-- Implementation Notes: Include pass/fail thresholds for memory drift and crash-free run.
-- Constraints/Standards: Reproducible procedure on target machine.
-- Tests Required: Harness run procedure + output artifact checks.
-- Done Criteria: Baseline documented and repeatable with pass criteria.
-- Deliverable Format: Benchmark doc + harness script.
-
 ### TASK-018: M3 service mode decision and packaging strategy
 - [ ] Status: Backlog
-- Size: S
+- Size: M
 - Objective: Decide and document Windows startup/service mode and packaging approach.
 - Business Value: Enables dependable deployment and operation.
 - Inputs/Context: `docs/deep-research-report.md` (M3-05, M3-06), `docs/setup-target-machine.md`.
@@ -310,6 +297,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 87 passed, 1 skipped; `_testing.py watchdog-fake` printed `watchdog triggered: True`, `recover calls: 1`, and a health summary line.
 - Ticket Record: `planning/tickets/TASK-016.md`
 
+### TASK-017: M3 long-session stability harness and baseline benchmark
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-25
+- Outcome: Added a repeatable test-mode stability harness, JSON benchmark artifact output, and documented the target-machine 4+ hour validation procedure with pass/fail thresholds.
+- Verification: `python -m pytest -q` -> 89 passed, 1 skipped; `_testing.py stability-harness-fake --output artifacts/stability-smoke.json` printed `sample count: 4`, `recovery count: 1`, `rss drift bytes: 8000000`, and `passed: True`.
+- Ticket Record: `planning/tickets/TASK-017.md`
+
 ---
 
 ## Usage Notes
@@ -317,4 +312,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-016`: `TASK-017`.
+- Recommended next ticket after `TASK-017`: `TASK-018`.

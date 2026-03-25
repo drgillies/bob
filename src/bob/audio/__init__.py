@@ -7,11 +7,14 @@ from bob.audio.utterance import (
     UtteranceRecorderConfig,
     VoiceActivityConfig,
 )
+from bob.audio.watchdog import AudioWatchdog, AudioWatchdogConfig
 
 __all__ = [
     "AudioCaptureConfig",
     "AudioCaptureError",
     "AudioCaptureService",
+    "AudioWatchdog",
+    "AudioWatchdogConfig",
     "EnergyVoiceActivityDetector",
     "UtteranceRecorder",
     "UtteranceRecorderConfig",

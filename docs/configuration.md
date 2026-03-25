@@ -59,6 +59,12 @@ Validation goals:
 - `audio.input_device`
 - `audio.output_device`
 - `audio.sample_rate_hz`
+- `audio.watchdog_timeout_seconds`
+- `observability.logs_directory`
+- `observability.log_filename`
+- `observability.log_max_bytes`
+- `observability.log_backup_count`
+- `observability.health_summary_interval_seconds`
 
 ## Suggested Secret Keys
 

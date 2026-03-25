@@ -51,6 +51,7 @@ class AudioConfig:
     input_device: str
     output_device: str
     sample_rate_hz: int
+    watchdog_timeout_seconds: int = 5
 
 
 @dataclass(frozen=True)
@@ -81,6 +82,15 @@ class TtsConfig:
 
 
 @dataclass(frozen=True)
+class ObservabilityConfig:
+    logs_directory: str
+    log_filename: str
+    log_max_bytes: int
+    log_backup_count: int
+    health_summary_interval_seconds: int
+
+
+@dataclass(frozen=True)
 class SecretConfig:
     values: dict[str, str] = field(default_factory=dict)
 
@@ -94,6 +104,7 @@ class AppConfig:
     actions: ActionConfig
     stt: SttConfig
     tts: TtsConfig
+    observability: ObservabilityConfig
     secrets: SecretConfig
 
 
@@ -229,6 +240,7 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
     open_app = _require_mapping(actions, "open_app")
     stt = _require_mapping(payload, "stt")
     tts = _require_mapping(payload, "tts")
+    observability = _require_mapping(payload, "observability")
 
     aliases_value = _require_mapping(open_app, "aliases")
     aliases: dict[str, str] = {}
@@ -258,6 +270,11 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
             input_device=_require_str(audio, "input_device"),
             output_device=_require_str(audio, "output_device"),
             sample_rate_hz=_require_positive_int(audio, "sample_rate_hz"),
+            watchdog_timeout_seconds=_optional_positive_int(
+                audio,
+                "watchdog_timeout_seconds",
+                default=5,
+            ),
         ),
         actions=ActionConfig(
             open_app=OpenAppConfig(
@@ -276,6 +293,16 @@ def _build_app_config(payload: Mapping[str, Any], secrets: Mapping[str, str]) ->
             engine=_require_str(tts, "engine"),
             speech_rate=_require_positive_int(tts, "speech_rate"),
             voice_id=_optional_str(tts, "voice_id"),
+        ),
+        observability=ObservabilityConfig(
+            logs_directory=_require_str(observability, "logs_directory"),
+            log_filename=_require_str(observability, "log_filename"),
+            log_max_bytes=_require_positive_int(observability, "log_max_bytes"),
+            log_backup_count=_require_positive_int(observability, "log_backup_count"),
+            health_summary_interval_seconds=_require_positive_int(
+                observability,
+                "health_summary_interval_seconds",
+            ),
         ),
         secrets=SecretConfig(values=dict(secrets)),
     )

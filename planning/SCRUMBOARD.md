@@ -69,19 +69,6 @@ Notes:
 
 ## Backlog
 
-### TASK-018: M3 service mode decision and packaging strategy
-- [ ] Status: Backlog
-- Size: M
-- Objective: Decide and document Windows startup/service mode and packaging approach.
-- Business Value: Enables dependable deployment and operation.
-- Inputs/Context: `docs/deep-research-report.md` (M3-05, M3-06), `docs/setup-target-machine.md`.
-- Target Files/Paths: `docs/service-mode.md`, `docs/setup-target-machine.md`, `README.md`.
-- Implementation Notes: Evaluate NSSM vs pywin32 service; source-run vs PyInstaller.
-- Constraints/Standards: Include install/uninstall reproducible steps.
-- Tests Required: Manual dry-run of chosen install/uninstall process.
-- Done Criteria: Decision and operational steps are documented and tested once.
-- Deliverable Format: Decision doc + updated setup steps.
-
 ### TASK-019: M3 privacy mode hardening
 - [ ] Status: Backlog
 - Size: S
@@ -305,6 +292,14 @@ No tasks currently in review.
 - Verification: `python -m pytest -q` -> 89 passed, 1 skipped; `_testing.py stability-harness-fake --output artifacts/stability-smoke.json` printed `sample count: 4`, `recovery count: 1`, `rss drift bytes: 8000000`, and `passed: True`.
 - Ticket Record: `planning/tickets/TASK-017.md`
 
+### TASK-018: M3 service mode decision and packaging strategy
+- [x] Status: Done
+- Size: M
+- Completed: 2026-03-25
+- Outcome: Documented the MVP startup and packaging strategy, added a Task Scheduler wrapper script, and recorded the current limitation that Bob still exits after bootstrap because a persistent runtime entrypoint does not exist yet.
+- Verification: `python -m pytest -q` -> 89 passed, 1 skipped; `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start-bob.ps1` launched the current startup path and then exited after bootstrap as expected; Task Scheduler dry-run commands are documented for execution on the target machine with sufficient permissions.
+- Ticket Record: `planning/tickets/TASK-018.md`
+
 ---
 
 ## Usage Notes
@@ -312,4 +307,4 @@ No tasks currently in review.
 - Move tasks between sections instead of duplicating them.
 - Keep task IDs stable and update only status/details.
 - Add links to PRs/commits under the relevant task when work starts.
-- Recommended next ticket after `TASK-017`: `TASK-018`.
+- Recommended next ticket after `TASK-018`: `TASK-019`.
